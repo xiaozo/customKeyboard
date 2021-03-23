@@ -1,0 +1,155 @@
+/**
+ *  @author Iceli
+ *  @date  2013/06/27
+ *  @desc  veryeast.cn最佳东方基础样式base.css
+ */
+/* start reset */
+.ve-layer {
+  /*input[type="radio"] {vertical-align: text-bottom;}
+  input[type="checkbox"] {vertical-align: bottom;}
+  .ie7 input[type="checkbox"] {vertical-align: baseline;}
+  .ie6 input {vertical-align: text-bottom;}*/
+  /* end reset */
+  /* start public */
+}
+.ve-layer body,
+.ve-layer form,
+.ve-layer h1,
+.ve-layer h2,
+.ve-layer h3,
+.ve-layer h4,
+.ve-layer h5,
+.ve-layer h6,
+.ve-layer p,
+.ve-layer blockquote,
+.ve-layer address,
+.ve-layer em,
+.ve-layer img,
+.ve-layer q,
+.ve-layer hr,
+.ve-layer strong,
+.ve-layer b,
+.ve-layer i,
+.ve-layer dl,
+.ve-layer dt,
+.ve-layer dd,
+.ve-layer ol,
+.ve-layer ul,
+.ve-layer li,
+.ve-layer label,
+.ve-layer table,
+.ve-layer article,
+.ve-layer aside,
+.ve-layer figure,
+.ve-layer footer,
+.ve-layer header,
+.ve-layer hgroup,
+.ve-layer nav,
+.ve-layer section {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+.ve-layer article,
+.ve-layer aside,
+.ve-layer figure,
+.ve-layer footer,
+.ve-layer header,
+.ve-layer hgroup,
+.ve-layer nav,
+.ve-layer section {
+  display: block;
+}
+.ve-layer li {
+  list-style: none;
+}
+.ve-layer img {
+  vertical-align: top;
+}
+.ve-layer em,
+.ve-layer i {
+  font-style: normal;
+}
+.ve-layer html {
+  overflow-y: scroll;
+}
+.ve-layer table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.ve-layer body {
+  color: #333;
+  background-color: #fbfbfb;
+  font: 12px/20px '宋体', Arial, Helvetica, sans-serif;
+}
+.ve-layer a {
+  text-decoration: none;
+  color: #1e89e7;
+  cursor: pointer;
+  outline: none;
+}
+.ve-layer a:hover {
+  text-decoration: underline;
+}
+.ve-layer a.undernone {
+  text-decoration: none;
+}
+.ve-layer .pointer {
+  cursor: pointer;
+}
+.ve-layer input,
+.ve-layer button,
+.ve-layer select,
+.ve-layer textarea {
+  outline: none;
+  margin: 0;
+  padding: 0;
+  resize: none;
+  vertical-align: middle;
+  font: 12px/20px '宋体', Arial, Helvetica, sans-serif;
+}
+.ve-layer input {
+  height: 20px;
+}
+.ve-layer .header input[type='text'],
+.ve-layer input[type='password'] {
+  border: 1px solid #d8d8d8;
+  width: 180px;
+  height: 24px;
+  line-height: 24px;
+  padding: 0 4px;
+}
+.ve-layer .input-ie6,
+.ve-layer .dropBtn,
+.ve-layer textarea {
+  border: 1px solid #d8d8d8;
+  width: 180px;
+  height: 24px;
+  line-height: 24px;
+  padding: 0 4px;
+}
+.ve-layer .clearfix {
+  zoom: 1;
+}
+.ve-layer .clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.ve-layer .fl {
+  float: left;
+}
+.ve-layer .fr {
+  float: right;
+}
+.ve-layer .hide {
+  display: none;
+}
+.ve-layer div {
+  box-sizing: border-box;
+}
+
