@@ -3848,9 +3848,9 @@
       }
     };
 
-    var keyboardEnglishTmpl = "<script id=\"zy-keyboard-english-tpl\" type=\"text/html\">\n<div class=\"keyboard-layer is-visible\">\n    <div class=\"rows\">\n     <ul>\n     <li>q</li>\n      <li>w</li>\n      <li>e</li>\n      <li>r</li>\n      <li>t</li>\n      <li>y</li>\n      <li>u</li>\n      <li>i</li>\n      <li>o</li>\n      <li>p</li>\n     </ul>\n     <ul>\n     <li>q</li>\n      <li>w</li>\n      <li>e</li>\n      <li>r</li>\n      <li>t</li>\n      <li>y</li>\n      <li>u</li>\n      <li>i</li>\n      <li>o</li>\n     </ul>\n    </div>\n</div>\n</script>";
+    var keyboardEnglishTmpl = "<script id=\"zy-keyboard-english-tpl\" type=\"text/html\">\n<div class=\"keyboard-layer\" id=\"zy-keyboard-english\">\n    <div class=\"rows\">\n     <ul>\n        <li class=\"keycap\">q</li>\n        <li class=\"keycap\">w</li>\n        <li class=\"keycap\">e</li>\n        <li class=\"keycap\">r</li>\n        <li class=\"keycap\">t</li>\n        <li class=\"keycap\">y</li>\n        <li class=\"keycap\">u</li>\n        <li class=\"keycap\">i</li>\n        <li class=\"keycap\">o</li>\n        <li class=\"keycap\">p</li>\n     </ul>\n     <ul>\n        <li class=\"keycap\">a</li>\n        <li class=\"keycap\">s</li>\n        <li class=\"keycap\">d</li>\n        <li class=\"keycap\">f</li>\n        <li class=\"keycap\">g</li>\n        <li class=\"keycap\">h</li>\n        <li class=\"keycap\">j</li>\n        <li class=\"keycap\">k</li>\n        <li class=\"keycap\">l</li>\n     </ul>\n     <ul>\n        <li class =\"bottom left w15 action modifier\" >⇧</li>\n        <li class=\"keycap\">z</li>\n        <li class=\"keycap\">x</li>\n        <li class=\"keycap\">c</li>\n        <li class=\"keycap\">v</li>\n        <li class=\"keycap\">b</li>\n        <li class=\"keycap\">n</li>\n        <li class=\"keycap\">m</li>\n        <li class =\"bottom right w15 action modifier\" >⌫</li>\n     </ul>\n     <ul>\n        <li class =\"keycap\" >;</li>\n        <li class=\"keycap\">,</li>\n        <li class=\"keycap w50\"> </li>\n        <li class=\"action\"><</li>\n        <li class=\"action\">></li>\n     </ul>\n    </div>\n</div>\n</script>";
 
-    var keyboardNumTmpl = "<script id=\"zy-keyboard-num-tpl\" type=\"text/html\">\n<div class=\"keyboard-layer\">\n    <div style=\"width:100px\">123</div>\n</div>\n</script>";
+    var keyboardNumTmpl = "<script id=\"zy-keyboard-num-tpl\" type=\"text/html\">\n<div class=\"keyboard-layer\" id=\"zy-keyboard-num\">\n    <div class=\"rows\">\n      <ul>\n        <li class=\"keycap\">7</li>\n        <li class=\"keycap\">8</li>\n        <li class=\"keycap\">9</li>\n        <li class=\"keycap\">÷</li>\n     </ul>\n     <ul>\n        <li class=\"keycap\">4</li>\n        <li class=\"keycap\">5</li>\n        <li class=\"keycap\">6</li>\n        <li class=\"keycap\">×</li>\n     </ul>\n     <ul>\n        <li class=\"keycap\">1</li>\n        <li class=\"keycap\">2</li>\n        <li class=\"keycap\">3</li>\n        <li class=\"keycap\">−</li>\n     </ul>\n     <ul>\n        <li class=\"keycap\">0</li>\n        <li class=\"keycap\">.</li>\n        <li class=\"keycap\">=</li>\n        <li class=\"keycap\">+</li>\n     </ul>\n    </div>\n</div>\n</script>";
 
     var keyboardBody = {
         actionEl: function actionEl() {
@@ -3878,10 +3878,20 @@
     };
 
     var content = {
+      flag: false,
+      cur: {
+        x: 0,
+        y: 0
+      },
+      nx: 0,
+      ny: 0,
+      dx: 0,
+      dy: 0,
+      x: 0,
+      y: 0,
       init: function init() {
         $("body").append(keyboardTmpl);
         $("body").append(template("zy-keyboard-tpl", {}));
-
         var that = this;
 
         keyboardTools.init(function (el, tag) {
@@ -3898,13 +3908,105 @@
 
         that.selectByIndex(0);
 
+        if (myUtils.isPC()) {
+          ///pc
+          $(".ZY__keyboard").mousedown(function (e) {
+            that.down(e);
+          });
+          $(".ZY__keyboard").mousemove(function (e) {
+            that.move(e);
+          });
+          $(".ZY__keyboard").mouseup(function (e) {
+            that.up(e);
+          });
+
+          document.body.addEventListener("mouseup", function (e) {
+            that.up(e);
+          }, false);
+        } else {
+          $(".ZY__keyboard").on("touchstart", function (e) {
+            that.down(e);
+          });
+
+          $(".ZY__keyboard").on("touchmove", function (e) {
+            that.move(e);
+          });
+
+          $(".ZY__keyboard").on("touchend", function (e) {
+            that.up(e);
+          });
+        }
+
+        ///增加拖拽手势
         $(".ZY__keyboard").mousedown(function (e) {
           e.preventDefault();
         });
+
+        ///默认选择第一项
+        this.selectByIndex(0);
       },
       selectByIndex: function selectByIndex(index) {
         keyboardTools.selectByIndex(index);
         keyboardBody.selectByIndex(index);
+        this.adjuestPostion($(".ZY__keyboard").offset().left, $(".ZY__keyboard").offset().top);
+      },
+
+      down: function down(e) {
+        var div = document.getElementsByClassName("ZY__keyboard")[0];
+        this.flag = true;
+        var touch;
+        if (e.touches) {
+          touch = e.touches[0];
+        } else {
+          touch = e;
+        }
+        this.cur.x = touch.clientX;
+        this.cur.y = touch.clientY;
+        this.dx = div.offsetLeft;
+        this.dy = div.offsetTop;
+      },
+      move: function move(e) {
+        if (this.flag) {
+          var div = document.getElementsByClassName("ZY__keyboard")[0];
+          var touch;
+          if (e.touches) {
+            touch = e.touches[0];
+          } else {
+            touch = e;
+          }
+          this.nx = touch.clientX - this.cur.x;
+          this.ny = touch.clientY - this.cur.y;
+          this.x = this.dx + this.nx;
+          this.y = this.dy + this.ny;
+          div.style.left = this.x + "px";
+          div.style.top = this.y + "px";
+        }
+      },
+      up: function up(e) {
+        this.flag = false;
+        this.adjuestPostion($(".ZY__keyboard").offset().left, $(".ZY__keyboard").offset().top);
+      },
+      adjuestPostion: function adjuestPostion(left, top, isAnimation) {
+        ///调整位置 能够展示出来
+        var keyboardWidth = $(".ZY__keyboard").get(0).clientWidth;
+        var keyboardHeight = $(".ZY__keyboard").get(0).clientHeight;
+        var clientWidth = $(window).width();
+        var clientHeight = $(window).height();
+
+        if (left < 0) {
+          left = 0;
+        } else if (left + keyboardWidth > clientWidth) {
+          left = clientWidth - keyboardWidth;
+        }
+
+        if (top < 0) {
+          top = 0;
+        } else if (top + keyboardHeight > clientHeight) {
+          top = clientHeight - keyboardHeight;
+        }
+
+        $(".ZY__keyboard").css("left", left + "px");
+        $(".ZY__keyboard").css("top", top + "px");
       }
     };
 

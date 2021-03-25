@@ -20,8 +20,12 @@
   flex-direction: column;
   position: fixed;
   top: 0;
-  right: 0;
+  left: 50;
   background-color: rgba(209, 213, 217, 0.97);
+  -webkit-tap-highlight-color: transparent;
+  width: auto;
+  overflow-x: auto;
+  flex: none;
 }
 .ZY__keyboard.hidden {
   display: none;
@@ -87,12 +91,20 @@
   /* Desktop size */
 }
 .ZY__keyboard .keyboard-layer .rows > ul {
+  flex-shrink: 0;
   list-style: none;
   height: 40px;
   padding: 0;
   margin: 0 0 3px;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+.ZY__keyboard .keyboard-layer .rows > ul > li:nth-of-type(1) {
+  margin-left: 2px;
 }
 .ZY__keyboard .keyboard-layer .rows > ul > li {
+  flex-shrink: 0;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -104,7 +116,6 @@
   padding: 8px 0;
   vertical-align: top;
   text-align: center;
-  float: left;
   color: var(--keycap-text);
   fill: currentColor;
   font-size: 20px;
@@ -113,17 +124,132 @@
   border-bottom-color: var(--keycap-background-border-bottom);
   border-radius: 5px;
   pointer-events: all;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  /* Extra spacing between two adjacent keys */
   position: relative;
   overflow: hidden;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
+.ZY__keyboard .keyboard-layer .rows > ul > li.bottom {
+  justify-content: flex-end;
+}
+.ZY__keyboard .keyboard-layer .rows > ul > li.left {
+  align-items: flex-start;
+  padding-left: 4px;
+}
+.ZY__keyboard .keyboard-layer .rows > ul > li.right {
+  align-items: flex-end;
+  padding-right: 4px;
+}
+.ZY__keyboard .keyboard-layer .rows > ul > li > .w0 {
+  width: 0;
+}
+.ZY__keyboard .keyboard-layer .rows > ul > li > .w5 {
+  width: 16px;
+}
+.ZY__keyboard .keyboard-layer .rows > ul > li > .w15 {
+  width: 52px;
+}
+.ZY__keyboard .keyboard-layer .rows > ul > li > .w20 {
+  width: 70px;
+}
+.ZY__keyboard .keyboard-layer .rows > ul > li > .w50 {
+  width: 178px;
+}
+.ZY__keyboard .keyboard-layer .rows > ul > li.separator {
+  background: transparent;
+  border: none;
+  pointer-events: none;
+}
+@media only screen and (max-width: 560px) {
+  .ZY__keyboard .keyboard-layer .rows > ul > li.if-wide {
+    display: none;
+  }
+}
+.ZY__keyboard .keyboard-layer .rows > ul > li.tex-math {
+  font-size: 25px;
+}
+.ZY__keyboard .keyboard-layer .rows > ul > li.keycap:active,
+.ZY__keyboard .keyboard-layer .rows > ul > li.keycap.active,
+.ZY__keyboard .keyboard-layer .rows > ul > li.action:active,
+.ZY__keyboard .keyboard-layer .rows > ul > li.action.active {
+  transform: translateY(-20px) scale(1.4, 1.4);
+  z-index: calc(var(--keyboard-zindex, 105) - 5);
+  color: var(--keyboard-text-active);
+}
+.ZY__keyboard .keyboard-layer .rows > ul > li.modifier:active,
+.ZY__keyboard .keyboard-layer .rows > ul > li.modifier.active {
+  background: var(--keyboard-text-active);
+  color: var(--keycap-text-active);
+}
+.ZY__keyboard .keyboard-layer .rows > ul > li.action.font-glyph,
+.ZY__keyboard .keyboard-layer .rows > ul > li.modifier.font-glyph {
+  font-size: 18px;
+}
+@media only screen and (max-width: 767px) {
+  .ZY__keyboard .keyboard-layer .rows > ul > li.action.font-glyph,
+  .ZY__keyboard .keyboard-layer .rows > ul > li.modifier.font-glyph {
+    font-size: 16px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .ZY__keyboard .keyboard-layer .rows > ul > li.fnbutton,
+  .ZY__keyboard .keyboard-layer .rows > ul > li.bigfnbutton {
+    font-size: 12px;
+  }
+}
+.ZY__keyboard .keyboard-layer .rows > ul > li.bigfnbutton {
+  font-size: 14px;
+}
+@media only screen and (max-width: 767px) {
+  .ZY__keyboard .keyboard-layer .rows > ul > li.bigfnbutton {
+    font-size: 9px;
+  }
+}
+.ZY__keyboard .keyboard-layer .rows > ul > li.modifier,
+.ZY__keyboard .keyboard-layer .rows > ul > li.action {
+  background-color: var(--keycap-modifier-background);
+  border-color: var(--keycap-modifier-border);
+  border-bottom-color: var(--keycap-modifier-border-bottom);
+  font-size: 65%;
+  font-weight: 100;
+}
+.ZY__keyboard .keyboard-layer .rows > ul > li.modifier.selected,
+.ZY__keyboard .keyboard-layer .rows > ul > li.action.selected {
+  color: var(--keyboard-text-active);
+}
+.ZY__keyboard .keyboard-layer .rows > ul > li.modifier.selected:hover,
+.ZY__keyboard .keyboard-layer .rows > ul > li.action.selected:hover,
+.ZY__keyboard .keyboard-layer .rows > ul > li.modifier.selected:active,
+.ZY__keyboard .keyboard-layer .rows > ul > li.action.selected:active,
+.ZY__keyboard .keyboard-layer .rows > ul > li.modifier.selected.pressed,
+.ZY__keyboard .keyboard-layer .rows > ul > li.action.selected.pressed,
+.ZY__keyboard .keyboard-layer .rows > ul > li.modifier.selected.active,
+.ZY__keyboard .keyboard-layer .rows > ul > li.action.selected.active {
+  color: white;
+}
+.ZY__keyboard .keyboard-layer .rows > ul > li.keycap.w50 {
+  font-size: 80%;
+  padding-top: 10px;
+  font-weight: 100;
+}
+.ZY__keyboard .keyboard-layer .rows > ul > li small {
+  color: #555;
+}
+@media only screen and (max-width: 767px) {
+  .ZY__keyboard .keyboard-layer .rows > ul > li small {
+    font-size: 9px;
+  }
+}
 @media only screen and (max-width: 414px) {
+  .ZY__keyboard .keyboard-layer .rows > ul > li:nth-of-type(1) {
+    margin-left: 2px;
+  }
   .ZY__keyboard .keyboard-layer .rows > ul > li {
-    width: calc(10vw - 2px);
+    width: calc(9vw - 2px);
     margin-right: 2px;
   }
   .ZY__keyboard .keyboard-layer .rows > ul > .w5 {
@@ -140,9 +266,12 @@
   }
 }
 @media only screen and (min-width: 415px) and (max-width: 768px) {
+  .ZY__keyboard .keyboard-layer .rows > ul > li:nth-of-type(1) {
+    margin-left: 2px;
+  }
   .ZY__keyboard .keyboard-layer .rows > ul > li {
     width: 37px;
-    margin-right: 3px;
+    margin-right: 2px;
   }
   .ZY__keyboard .keyboard-layer .rows > ul > .w5 {
     width: 17px;
@@ -160,6 +289,9 @@
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
   .ZY__keyboard .keyboard-layer .rows > ul {
     height: 52px;
+  }
+  .ZY__keyboard .keyboard-layer .rows > ul > li:nth-of-type(1) {
+    margin-left: 4px;
   }
   .ZY__keyboard .keyboard-layer .rows > ul > li {
     height: 52px;
@@ -182,6 +314,9 @@
 @media only screen and (min-width: 1025px) {
   .ZY__keyboard .keyboard-layer .rows > ul {
     height: 52px;
+  }
+  .ZY__keyboard .keyboard-layer .rows > ul > li:nth-of-type(1) {
+    margin-left: 6px;
   }
   .ZY__keyboard .keyboard-layer .rows > ul > li {
     height: 52px;

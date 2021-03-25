@@ -1,5 +1,30 @@
 <script id="zy-keyboard-num-tpl" type="text/html">
-<div class="keyboard-layer">
-    <div style="width:100px">123</div>
+<div class="keyboard-layer" id="zy-keyboard-num">
+    <div class="rows">
+      <ul>
+        <li class="keycap">7</li>
+        <li class="keycap">8</li>
+        <li class="keycap">9</li>
+        <li class="keycap">÷</li>
+     </ul>
+     <ul>
+        <li class="keycap">4</li>
+        <li class="keycap">5</li>
+        <li class="keycap">6</li>
+        <li class="keycap">×</li>
+     </ul>
+     <ul>
+        <li class="keycap">1</li>
+        <li class="keycap">2</li>
+        <li class="keycap">3</li>
+        <li class="keycap">−</li>
+     </ul>
+     <ul>
+        <li class="keycap">0</li>
+        <li class="keycap">.</li>
+        <li class="keycap">=</li>
+        <li class="keycap">+</li>
+     </ul>
+    </div>
 </div>
 </script>

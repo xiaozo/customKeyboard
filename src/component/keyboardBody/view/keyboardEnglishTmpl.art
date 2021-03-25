@@ -1,28 +1,46 @@
 <script id="zy-keyboard-english-tpl" type="text/html">
-<div class="keyboard-layer is-visible">
+<div class="keyboard-layer" id="zy-keyboard-english">
     <div class="rows">
      <ul>
-     <li>q</li>
-      <li>w</li>
-      <li>e</li>
-      <li>r</li>
-      <li>t</li>
-      <li>y</li>
-      <li>u</li>
-      <li>i</li>
-      <li>o</li>
-      <li>p</li>
+        <li class="keycap">q</li>
+        <li class="keycap">w</li>
+        <li class="keycap">e</li>
+        <li class="keycap">r</li>
+        <li class="keycap">t</li>
+        <li class="keycap">y</li>
+        <li class="keycap">u</li>
+        <li class="keycap">i</li>
+        <li class="keycap">o</li>
+        <li class="keycap">p</li>
      </ul>
      <ul>
-     <li>q</li>
-      <li>w</li>
-      <li>e</li>
-      <li>r</li>
-      <li>t</li>
-      <li>y</li>
-      <li>u</li>
-      <li>i</li>
-      <li>o</li>
+        <li class="keycap">a</li>
+        <li class="keycap">s</li>
+        <li class="keycap">d</li>
+        <li class="keycap">f</li>
+        <li class="keycap">g</li>
+        <li class="keycap">h</li>
+        <li class="keycap">j</li>
+        <li class="keycap">k</li>
+        <li class="keycap">l</li>
+     </ul>
+     <ul>
+        <li class ="bottom left w15 action modifier" >⇧</li>
+        <li class="keycap">z</li>
+        <li class="keycap">x</li>
+        <li class="keycap">c</li>
+        <li class="keycap">v</li>
+        <li class="keycap">b</li>
+        <li class="keycap">n</li>
+        <li class="keycap">m</li>
+        <li class ="bottom right w15 action modifier" >⌫</li>
+     </ul>
+     <ul>
+        <li class ="keycap" >;</li>
+        <li class="keycap">,</li>
+        <li class="keycap w50"> </li>
+        <li class="action"><</li>
+        <li class="action">></li>
      </ul>
     </div>
 </div>

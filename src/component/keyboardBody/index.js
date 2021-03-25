@@ -10,7 +10,7 @@ var keyboardBody= {
     init: function (insert) {
         $('body').append(keyboardEnglishTmpl)
         $('body').append(keyboardNumTmpl)
-        
+
         var el =  template('zy-keyboard-english-tpl', {})
         insert(el)
 
