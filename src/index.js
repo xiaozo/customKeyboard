@@ -14,10 +14,20 @@ function init() {
 
   $(document).on("focusin", ".mq-textarea textarea", function (e) {
     MQCurrentField = $(e.target).parents(".save_span_tag");
+    content.show()
+
+    $(document).one("touchstart",function(){
+      if (MQCurrentField) {
+        MQCurrentField.blur()
+        $('.mq-textarea textarea').blur()
+      }
+    })
+   
   });
 
   $(document).on("focusout", ".mq-textarea textarea", function (e) {
     MQCurrentField = null;
+    content.hidden()
   });
 
   content.init();

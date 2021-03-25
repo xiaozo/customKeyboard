@@ -3812,7 +3812,7 @@
       return myUtils;
     }();
 
-    var keyboardTmpl = "<script id=\"zy-keyboard-tpl\" type=\"text/html\">\n<div class=\"ZY__keyboard\">\n \n</div>\n</script>";
+    var keyboardTmpl = "<script id=\"zy-keyboard-tpl\" type=\"text/html\">\n<div class=\"ZY__keyboard hidden\">\n \n</div>\n</script>";
 
     var keyboardToolsTmpl = "<script id=\"zy-keyboard-tools-tpl\" type=\"text/html\">\n<div class=\"keyboard-toolbar\">\n    <div class=\"left\">\n        {{each left}}\n            <div class = \"layer-switch action\">\n                {{#$value.text}}\n            </div>\n        {{/each}}\n    </div>\n    <div class=\"right\">\n        <div>X</div>\n    </div>\n</div>\n</script>";
 
@@ -3877,6 +3877,9 @@
 
     };
 
+    var systemTouchFn = function systemTouchFn() {
+      event.preventDefault();
+    };
     var content = {
       flag: false,
       cur: {
@@ -3925,6 +3928,7 @@
           }, false);
         } else {
           $(".ZY__keyboard").on("touchstart", function (e) {
+            e.stopPropagation();
             that.down(e);
           });
 
@@ -3945,6 +3949,13 @@
         ///默认选择第一项
         this.selectByIndex(0);
       },
+      show: function show() {
+        $(".ZY__keyboard").removeClass("hidden");
+      },
+      hidden: function hidden() {
+        $(".ZY__keyboard").addClass("hidden");
+      },
+      ///private
       selectByIndex: function selectByIndex(index) {
         keyboardTools.selectByIndex(index);
         keyboardBody.selectByIndex(index);
@@ -3964,6 +3975,7 @@
         this.cur.y = touch.clientY;
         this.dx = div.offsetLeft;
         this.dy = div.offsetTop;
+        document.body.addEventListener("touchmove", systemTouchFn, false);
       },
       move: function move(e) {
         if (this.flag) {
@@ -3984,6 +3996,8 @@
       },
       up: function up(e) {
         this.flag = false;
+        document.body.removeEventListener("touchmove", systemTouchFn);
+
         this.adjuestPostion($(".ZY__keyboard").offset().left, $(".ZY__keyboard").offset().top);
       },
       adjuestPostion: function adjuestPostion(left, top, isAnimation) {
@@ -4019,10 +4033,19 @@
 
       $$1(document).on("focusin", ".mq-textarea textarea", function (e) {
         MQCurrentField = $$1(e.target).parents(".save_span_tag");
+        content.show();
+
+        $$1(document).one("touchstart", function () {
+          if (MQCurrentField) {
+            MQCurrentField.blur();
+            $$1('.mq-textarea textarea').blur();
+          }
+        });
       });
 
       $$1(document).on("focusout", ".mq-textarea textarea", function (e) {
         MQCurrentField = null;
+        content.hidden();
       });
 
       content.init();
