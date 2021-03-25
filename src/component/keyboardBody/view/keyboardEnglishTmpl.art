@@ -1,0 +1,29 @@
+<script id="zy-keyboard-english-tpl" type="text/html">
+<div class="keyboard-layer is-visible">
+    <div class="rows">
+     <ul>
+     <li>q</li>
+      <li>w</li>
+      <li>e</li>
+      <li>r</li>
+      <li>t</li>
+      <li>y</li>
+      <li>u</li>
+      <li>i</li>
+      <li>o</li>
+      <li>p</li>
+     </ul>
+     <ul>
+     <li>q</li>
+      <li>w</li>
+      <li>e</li>
+      <li>r</li>
+      <li>t</li>
+      <li>y</li>
+      <li>u</li>
+      <li>i</li>
+      <li>o</li>
+     </ul>
+    </div>
+</div>
+</script>

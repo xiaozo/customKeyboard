@@ -1,0 +1,5 @@
+<script id="zy-keyboard-num-tpl" type="text/html">
+<div class="keyboard-layer">
+    <div style="width:100px">123</div>
+</div>
+</script>

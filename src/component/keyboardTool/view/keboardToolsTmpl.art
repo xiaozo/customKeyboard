@@ -1,0 +1,14 @@
+<script id="zy-keyboard-tools-tpl" type="text/html">
+<div class="keyboard-toolbar">
+    <div class="left">
+        {{each left}}
+            <div class = "layer-switch action">
+                {{#$value.text}}
+            </div>
+        {{/each}}
+    </div>
+    <div class="right">
+        <div>X</div>
+    </div>
+</div>
+</script>

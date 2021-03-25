@@ -7,6 +7,7 @@ const postcss = require('rollup-plugin-postcss');
 const less = require('less');
 const string = require('rollup-plugin-string');
 const autoprefixer = require('autoprefixer');
+const json = require('rollup-plugin-json');
 
 
 const resolveFile = function (filePath) {
@@ -65,6 +66,7 @@ module.exports = [
       name: 'CustomKeyboard',
     },
     plugins: [
+      json(),
       postcss({
         extract: true,
         minimize: isProductionEnv,
