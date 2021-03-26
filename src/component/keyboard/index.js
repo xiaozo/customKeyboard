@@ -5,7 +5,14 @@ import myUtils from "../../utils/index";
 
 var systemTouchFn = function () {
   event.preventDefault();
+  event.stopPropagation
 };
+
+var Keyboard_tmpl_tag = 0;
+
+
+///clickKey点击按键
+///clickDel点击删除
 var content = {
   flag: false,
   cur: {
@@ -18,86 +25,118 @@ var content = {
   dy: 0,
   x: 0,
   y: 0,
-  init: function () {
-    $("body").append(keyboardTmpl);
-    $("body").append(template("zy-keyboard-tpl", {}));
+  downTimestamp:0,
+  id:null,
+  keyboardData:null,
+  handle:null,
+  loadTmpl:function(){
+    if (Keyboard_tmpl_tag == 0) {
+      $("body").append(keyboardTmpl);
+      keyboardTool.loadTmpl()
+      keyboardBody.loadTmpl()
+      Keyboard_tmpl_tag = 1
+    }
+  },
+  init: function (id = "zy-keyboard-"+myUtils.uuid(),keyboardData = {},handle = {}) {
+    this.id = id;
+    this.keyboardData = keyboardData;
+    this.handle = handle
+    this.loadTmpl()
+    $("body").append(template("zy-keyboard-tpl", {id:this.id}));
     var that = this;
 
-    keyboardTool.init(function (el, tag) {
-      $(".ZY__keyboard").append(el);
+    keyboardTool.init(id,function (el, tag) {
+      that.main().append(el);
       $(tag).on("selected", function (e, data) {
         var index = data.index;
         that.selectByIndex(index);
       });
     });
 
-    keyboardBody.init(function (el) {
-      $(".ZY__keyboard").append(el);
+    keyboardBody.init(id,function (el) {
+      that.main().append(el);
     });
 
-    that.selectByIndex(0);
-
+    ///增加拖拽手势
     if (myUtils.isPC()) {
       ///pc
-      $(".ZY__keyboard").mousedown(function (e) {
+      this.main().mousedown(function (e) {
         that.down(e);
       });
-      $(".ZY__keyboard").mousemove(function (e) {
+      this.main().mousemove(function (e) {
         that.move(e);
       });
-      $(".ZY__keyboard").mouseup(function (e) {
+      this.main().mouseup(function (e) {
         that.up(e);
       });
 
-      document.body.addEventListener(
-        "mouseup",
-        function (e) {
-          that.up(e);
-        },
-        false
-      );
+      $(document).mouseup(function (e) {
+        that.up(e);
+      });
     } else {
-      $(".ZY__keyboard").on("touchstart", function (e) {
+      this.main().on("touchstart", function (e) {
         e.stopPropagation()
         that.down(e);
       });
 
-      $(".ZY__keyboard").on("touchmove", function (e) {
+      this.main().on("touchmove", function (e) {
         that.move(e);
       });
 
-      $(".ZY__keyboard").on("touchend", function (e) {
+      this.main().on("touchend", function (e) {
         that.up(e);
       });
     }
 
-    ///增加拖拽手势
-    $(".ZY__keyboard").mousedown(function (e) {
+
+    this.main().mousedown(function (e) {
       e.preventDefault();
     });
+
+
+    $("#"+this.id).on("clickKey",function (e, data) {
+     if (that.handle["clickKey"] != undefined) {
+      that.handle["clickKey"](data)
+     }
+    })
+
+    $("#"+this.id).on("clickDel",function (e, data) {
+      if (that.handle["clickDel"] != undefined) {
+       that.handle["clickDel"](data)
+      }
+     })
 
     ///默认选择第一项
     this.selectByIndex(0);
   },
-  show:function(){
-    $(".ZY__keyboard").removeClass("hidden");
+  show:function(left = 0,top = 0){
+    this.main().removeClass("hidden");
+    this.adjuestPostion(left,top)
+
   },
   hidden:function(){
-    $(".ZY__keyboard").addClass("hidden");
+    this.main().addClass("hidden");
   },
   ///private
+  main:function(){
+    if (this.id != null) {
+      return $('#'+this.id)
+    }
+    return $(".ZY__keyboard")
+  },
   selectByIndex: function (index) {
     keyboardTool.selectByIndex(index);
     keyboardBody.selectByIndex(index);
     this.adjuestPostion(
-      $(".ZY__keyboard").offset().left,
-      $(".ZY__keyboard").offset().top
+      this.main().offset().left,
+      this.main().offset().top
     );
   },
 
   down: function (e) {
-    var div = document.getElementsByClassName("ZY__keyboard")[0];
+    var div = this.main().get(0);
     this.flag = true;
+    this.downTimestamp = Date.now();
     var touch;
     if (e.touches) {
       touch = e.touches[0];
@@ -111,8 +150,8 @@ var content = {
     document.body.addEventListener("touchmove", systemTouchFn, false);
   },
   move: function (e) {
-    if (this.flag) {
-      var div = document.getElementsByClassName("ZY__keyboard")[0];
+    if (this.flag && Date.now() - this.downTimestamp >= 70 ) {
+      var div = this.main().get(0);
       var touch;
       if (e.touches) {
         touch = e.touches[0];
@@ -125,21 +164,21 @@ var content = {
       this.y = this.dy + this.ny;
       div.style.left = this.x + "px";
       div.style.top = this.y + "px";
-    }
+    } 
   },
   up: function (e) {
     this.flag = false;
     document.body.removeEventListener("touchmove", systemTouchFn);
 
     this.adjuestPostion(
-      $(".ZY__keyboard").offset().left,
-      $(".ZY__keyboard").offset().top
+      this.main().offset().left,
+      this.main().offset().top
     );
   },
   adjuestPostion: function (left, top, isAnimation) {
     ///调整位置 能够展示出来
-    var keyboardWidth = $(".ZY__keyboard").get(0).clientWidth;
-    var keyboardHeight = $(".ZY__keyboard").get(0).clientHeight;
+    var keyboardWidth = this.main().get(0).clientWidth;
+    var keyboardHeight = this.main().get(0).clientHeight;
     var clientWidth = $(window).width();
     var clientHeight = $(window).height();
 
@@ -155,8 +194,8 @@ var content = {
       top = clientHeight - keyboardHeight;
     }
 
-    $(".ZY__keyboard").css("left", left + "px");
-    $(".ZY__keyboard").css("top", top + "px");
+    this.main().css("left", left + "px");
+    this.main().css("top", top + "px");
   },
 };
 

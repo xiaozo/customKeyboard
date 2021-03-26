@@ -1,46 +1,42 @@
 <script id="zy-keyboard-english-tpl" type="text/html">
-<div class="keyboard-layer" id="zy-keyboard-english">
+<div class="keyboard-layer keyboard-layer-engish" id="{{id}}-enlish">
     <div class="rows">
      <ul>
-        <li class="keycap">q</li>
-        <li class="keycap">w</li>
-        <li class="keycap">e</li>
-        <li class="keycap">r</li>
-        <li class="keycap">t</li>
-        <li class="keycap">y</li>
-        <li class="keycap">u</li>
-        <li class="keycap">i</li>
-        <li class="keycap">o</li>
-        <li class="keycap">p</li>
+        <li class="keycap"  data-letter="q-Q">q</li>
+        <li class="keycap"  data-letter="w-W">w</li>
+        <li class="keycap"  data-letter="e-E">e</li>
+        <li class="keycap"  data-letter="r-R">r</li>
+        <li class="keycap"  data-letter="t-T">t</li>
+        <li class="keycap"  data-letter="y-Y">y</li>
+        <li class="keycap"  data-letter="u-U">u</li>
+        <li class="keycap"  data-letter="i-I">i</li>
+        <li class="keycap"  data-letter="o-O">o</li>
+        <li class="keycap"  data-letter="p-P">p</li>
      </ul>
      <ul>
-        <li class="keycap">a</li>
-        <li class="keycap">s</li>
-        <li class="keycap">d</li>
-        <li class="keycap">f</li>
-        <li class="keycap">g</li>
-        <li class="keycap">h</li>
-        <li class="keycap">j</li>
-        <li class="keycap">k</li>
-        <li class="keycap">l</li>
+        <li class="keycap"  data-letter="a-A">a</li>
+        <li class="keycap"  data-letter="s-S">s</li>
+        <li class="keycap"  data-letter="d-D">d</li>
+        <li class="keycap"  data-letter="f-F">f</li>
+        <li class="keycap"  data-letter="g-G">g</li>
+        <li class="keycap"  data-letter="h-H">h</li>
+        <li class="keycap"  data-letter="j-J">j</li>
+        <li class="keycap"  data-letter="k-K">k</li>
+        <li class="keycap"  data-letter="l-L">l</li>
      </ul>
      <ul>
-        <li class ="bottom left w15 action modifier" >⇧</li>
-        <li class="keycap">z</li>
-        <li class="keycap">x</li>
-        <li class="keycap">c</li>
-        <li class="keycap">v</li>
-        <li class="keycap">b</li>
-        <li class="keycap">n</li>
-        <li class="keycap">m</li>
-        <li class ="bottom right w15 action modifier" >⌫</li>
+        <li class ="bottom left w15 action modifier" data-action="shift">⇧</li>
+        <li class="keycap"  data-letter="z-Z">z</li>
+        <li class="keycap"  data-letter="x-X">x</li>
+        <li class="keycap"  data-letter="c-C">c</li>
+        <li class="keycap"  data-letter="v-V">v</li>
+        <li class="keycap"  data-letter="b-B">b</li>
+        <li class="keycap"  data-letter="n-N">n</li>
+        <li class="keycap"  data-letter="m-M">m</li>
+        <li class ="bottom right w15 action modifier" data-action="del">⌫</li>
      </ul>
      <ul>
-        <li class ="keycap" >;</li>
-        <li class="keycap">,</li>
-        <li class="keycap w50"> </li>
-        <li class="action"><</li>
-        <li class="action">></li>
+        <li class="keycap w50" data-command=' '> </li>
      </ul>
     </div>
 </div>

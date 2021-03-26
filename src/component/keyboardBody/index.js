@@ -1,27 +1,70 @@
 import keyboardEnglishTmpl from './view/keyboardEnglishTmpl.art';
 import keyboardNumTmpl from './view/keyboardNumTmpl.art';
+import myUtils from "../../utils/index";
+import { event } from 'jquery';
 var keyboardBody= {
+    id:null,
+    isCapital:false,
     actionEl: function() {
-        return $('.ZY__keyboard .keyboard-layer')
+        return $('#'+this.id+' .keyboard-layer')
      },
      actionSelEl: function() {
-        return $('.ZY__keyboard .keyboard-layer.is-visible')
+        return $('#'+this.id+' .keyboard-layer.is-visible')
      },
-    init: function (insert) {
-        $('body').append(keyboardEnglishTmpl)
-        $('body').append(keyboardNumTmpl)
+    init: function (id,insert) {
+        this.id = id
 
-        var el =  template('zy-keyboard-english-tpl', {})
+        var that = this
+        var el =  template('zy-keyboard-english-tpl', {id:id})
         insert(el)
 
-        el =  template('zy-keyboard-num-tpl', {})
+        el =  template('zy-keyboard-num-tpl', {id:id})
         insert(el)
 
+        ///增加事件
+        $('#'+this.id+' .keycap').on("mouseup", function (e) {
+            var data_command = $(this).attr("data-command")
+            if (!myUtils.isNull(data_command)) {
+                $('#'+that.id).trigger("clickKey", data_command);
+            }
+        })
+
+        ///增加事件
+        $('#'+this.id+' .action').on("mouseup", function (e) {
+            var data_action = $(this).attr("data-action")
+            if (!myUtils.isNull(data_action)) {
+              if (data_action === "shift") {
+                that.isCapital = !that.isCapital
+                  that.cutCapitalHandel()
+              } else if (data_action === "del") {
+                $('#'+that.id).trigger("clickDel");
+              }
+            }
+            
+        })
+
+        that.cutCapitalHandel()
+    },
+    //private
+    // 切换大小写
+    cutCapitalHandel:function(){
+        var items =  $('#'+this.id+' .keyboard-layer-engish .keycap[data-letter]')
+        for (let item of items) {    //for of 推荐用在遍历数组
+            var letters = $(item).attr("data-letter").split('-')
+            var letter = (this.isCapital ) ? letters[1] : letters[0]
+            $(item).get(0).innerHTML = letter
+            $(item).attr("data-command",letter)
+           
+        }
     },
     selectByIndex:function(index) {
         var actionEl = this.actionEl();
         actionEl.removeClass('is-visible')
         $(actionEl.get(index)).addClass('is-visible')
+    },
+    loadTmpl:function(){
+        $('body').append(keyboardEnglishTmpl)
+        $('body').append(keyboardNumTmpl)
     }
   
   }

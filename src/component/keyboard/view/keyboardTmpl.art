@@ -1,5 +1,5 @@
 <script id="zy-keyboard-tpl" type="text/html">
-<div class="ZY__keyboard hidden">
+<div class="ZY__keyboard hidden" id="{{id}}">
  
 </div>
 </script>

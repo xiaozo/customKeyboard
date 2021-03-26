@@ -8,7 +8,7 @@
         {{/each}}
     </div>
     <div class="right">
-        <div>X</div>
+        <div class = "layer-switch action">⌫</div>
     </div>
 </div>
 </script>
