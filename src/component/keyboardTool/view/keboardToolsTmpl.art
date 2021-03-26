@@ -7,8 +7,8 @@
             </div>
         {{/each}}
     </div>
-    <div class="right">
-        <div class = "layer-switch action">⌫</div>
-    </div>
+    <ul class="right">
+        <li class = "layer-switch action" data-action="del">⌫</div>
+    </ul>
 </div>
 </script>

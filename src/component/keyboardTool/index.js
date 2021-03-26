@@ -27,10 +27,11 @@ var keyboardTools = {
       $(tag).trigger("selected", { index: index });
     });
 
-    var actionRightEl = this.actionRightEl();
-    actionRightEl.on("click", function (e) {
-       console.log(this);
-      });
+    // var actionRightEl = this.actionRightEl();
+    // actionRightEl.on("click", function (e) {
+    //     var data_action = $(this).attr("data-action")
+    //     // console.log(data_action);
+    // });
   },
   currentIndex: function () {
     var actionSelEl = this.actionSelEl().get(0);
@@ -42,7 +43,10 @@ var keyboardTools = {
     $(actionEl.get(index)).addClass("selected");
   },
   loadTmpl:function(){
-    $("body").append(keyboardToolsTmpl);
+      if ($("#zy-keyboard-tools-tpl").length == 0) {
+        $("body").append(keyboardToolsTmpl);
+      }
+   
   }
 };
 

@@ -63,8 +63,13 @@ var keyboardBody= {
         $(actionEl.get(index)).addClass('is-visible')
     },
     loadTmpl:function(){
-        $('body').append(keyboardEnglishTmpl)
-        $('body').append(keyboardNumTmpl)
+        if ($("#zy-keyboard-english-tpl").length == 0) {
+            $("body").append(keyboardEnglishTmpl);
+        }
+
+        if ($("#zy-keyboard-num-tpl").length == 0) {
+            $("body").append(keyboardNumTmpl);
+        }
     }
   
   }

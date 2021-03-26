@@ -8,9 +8,6 @@ var systemTouchFn = function () {
   event.stopPropagation
 };
 
-var Keyboard_tmpl_tag = 0;
-
-
 ///clickKey点击按键
 ///clickDel点击删除
 var content = {
@@ -29,13 +26,13 @@ var content = {
   id:null,
   keyboardData:null,
   handle:null,
+  ///加载模板
   loadTmpl:function(){
-    if (Keyboard_tmpl_tag == 0) {
+    if ($('#zy-keyboard-tpl').length == 0) {
       $("body").append(keyboardTmpl);
-      keyboardTool.loadTmpl()
-      keyboardBody.loadTmpl()
-      Keyboard_tmpl_tag = 1
     }
+    keyboardTool.loadTmpl()
+    keyboardBody.loadTmpl()
   },
   init: function (id = "zy-keyboard-"+myUtils.uuid(),keyboardData = {},handle = {}) {
     this.id = id;
@@ -87,7 +84,6 @@ var content = {
         that.up(e);
       });
     }
-
 
     this.main().mousedown(function (e) {
       e.preventDefault();
