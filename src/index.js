@@ -88,8 +88,7 @@ function clickDelAction() {
 
 ///$扩展
 $.fn.latex = function () {
-  
-  return $(this).MQField.latex();
+  return $(this).MQField().latex();
 };
 
 $.fn.MQField = function() {

@@ -29,6 +29,9 @@ var content = {
   keyboardData:null,
   handle:null,
   ///加载模板
+  dataConfig:function () {
+    return this.keyboardData["data_config"]
+  },
   loadTmpl:function(){
     if ($('#zy-keyboard-tpl').length == 0) {
       $("body").append(keyboardTmpl);
@@ -95,6 +98,7 @@ var content = {
 
     $("#"+this.id).on("clickKey",function (e, data) {
      if (that.handle["clickKey"] != undefined) {
+       data = that.dataConfig()["data"] == undefined ? data : that.dataConfig()["data"]
       that.handle["clickKey"](data)
      }
     })
