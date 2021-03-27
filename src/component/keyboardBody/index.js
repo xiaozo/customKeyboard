@@ -1,7 +1,6 @@
 import keyboardEnglishTmpl from './view/keyboardEnglishTmpl.art';
 import keyboardNumTmpl from './view/keyboardNumTmpl.art';
 import myUtils from "../../utils/index";
-import { event } from 'jquery';
 var keyboardBody= {
     id:null,
     isCapital:false,
@@ -38,9 +37,18 @@ var keyboardBody= {
                   that.cutCapitalHandel()
               } else if (data_action === "del") {
                 $('#'+that.id).trigger("clickDel");
+              } else if (data_action === "cursor-left-move") {
+                $('#'+that.id).trigger("cursorLeftMove");
+                console.log("ccc");
+              } else if (data_action === "cursor-right-move") {
+                $('#'+that.id).trigger("cursorRightMove");
               }
             }
             
+        })
+
+        $('#'+this.id+' .action').on('click',function () {
+            console.log("wwww");
         })
 
         that.cutCapitalHandel()

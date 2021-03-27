@@ -6,24 +6,36 @@
         <li class="keycap" data-command="8">8</li>
         <li class="keycap" data-command="9">9</li>
         <li class="keycap" data-command="÷">÷</li>
+        <li class="separator w5"></li>
+        <li class="keycap" data-command="/">/</li>
+        <li class="keycap" data-command='\sqrt'>√</li>
      </ul>
      <ul>
         <li class="keycap" data-command="4">4</li>
         <li class="keycap" data-command="5">5</li>
         <li class="keycap" data-command="6">6</li>
         <li class="keycap" data-command="×">×</li>
+        <li class="separator w5"></li>
+        <li class="keycap" data-command="(">(</li>
+        <li class="keycap" data-command=")">)</li>
      </ul>
      <ul>
         <li class="keycap" data-command="1">1</li>
         <li class="keycap" data-command="2">2</li>
         <li class="keycap" data-command="3">3</li>
         <li class="keycap" data-command="−">−</li>
+         <li class="separator w5"></li>
+        <li class="keycap" data-command="[">[</li>
+        <li class="keycap" data-command="]">]</li>
      </ul>
      <ul>
         <li class="keycap" data-command="0">0</li>
         <li class="keycap" data-command=".">.</li>
         <li class="keycap" data-command="=">=</li>
         <li class="keycap" data-command="+">+</li>
+         <li class="separator w5"></li>
+        <li class ="action modifier" data-action="cursor-left-move"><</li>
+        <li class ="action modifier" data-action="cursor-right-move">></li>
      </ul>
     </div>
 </div>

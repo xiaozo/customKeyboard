@@ -10,6 +10,8 @@ var systemTouchFn = function () {
 
 ///clickKey点击按键
 ///clickDel点击删除
+///cursorLeftMove光标左移动
+///cursorRightMove光标右移动
 var content = {
   flag: false,
   cur: {
@@ -102,6 +104,18 @@ var content = {
       }
      })
 
+     $("#"+this.id).on("cursorRightMove",function (e, data) {
+      if (that.handle["cursorRightMove"] != undefined) {
+       that.handle["cursorRightMove"](data)
+      }
+     })
+
+     $("#"+this.id).on("cursorLeftMove",function (e, data) {
+      if (that.handle["cursorLeftMove"] != undefined) {
+       that.handle["cursorLeftMove"](data)
+      }
+     })
+
     ///默认选择第一项
     this.selectByIndex(0);
   },
@@ -146,7 +160,8 @@ var content = {
     document.body.addEventListener("touchmove", systemTouchFn, false);
   },
   move: function (e) {
-    if (this.flag && Date.now() - this.downTimestamp >= 70 ) {
+    // && Date.now() - this.downTimestamp >= 80
+    if (this.flag && Date.now() - this.downTimestamp >= 80 ) {
       var div = this.main().get(0);
       var touch;
       if (e.touches) {

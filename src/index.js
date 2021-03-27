@@ -1,5 +1,5 @@
 import "./base.less";
-import MathQuill from "mathquill-jquery";
+// import MathQuill from "mathquill-jquery";
 import $ from "jquery";
 import "jquery.nicescroll";
 import myUtils from "./utils/index";
@@ -35,20 +35,35 @@ function init() {
 
   content.init(undefined,keyboard,{
     clickKey:function (data) {
-     var MQCurrentField = MQCurrentFieldEl.MQField();
-     MQCurrentField.cmd(data)
+      if (MQCurrentFieldEl) {
+        var MQCurrentField = MQCurrentFieldEl.MQField();
+        MQCurrentField.cmd(data)
+      }
+    
     },
     clickDel:function () {
       console.log("del");
       clickDelAction()
-     
-    }
+    },
+    cursorLeftMove:function () {
+      console.log("cursorLeftMove");
+      var MQCurrentField = MQCurrentFieldEl.MQField();
+      MQCurrentField.keystroke('Left');
+    },
+    cursorRightMove:function () {
+      console.log("cursorRightMove");
+      var MQCurrentField = MQCurrentFieldEl.MQField();
+      MQCurrentField.keystroke('Right');
+    },
   })
 }
 
 function initEl(elstr, config) {
   var value = $(elstr);
   value.addClass("save_span_tag");
+  value.on("touchstart",function(e){
+    e.stopPropagation()
+  })
   var answerMathField = MQ.MathField($(elstr).get(0), config);
   value.data("save_span", answerMathField);
   if (myUtils.isPC() == false) {

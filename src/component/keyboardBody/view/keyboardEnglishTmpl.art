@@ -36,7 +36,11 @@
         <li class ="bottom right w15 action modifier" data-action="del">⌫</li>
      </ul>
      <ul>
+        <li class="keycap"  data-command=';'>;</li>
+        <li class="keycap"  data-command=','>,</li>
         <li class="keycap w50" data-command=' '> </li>
+        <li class ="action modifier" data-action="cursor-left-move"><</li>
+        <li class ="action modifier" data-action="cursor-right-move">></li>
      </ul>
     </div>
 </div>
