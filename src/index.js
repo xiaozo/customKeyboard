@@ -19,6 +19,7 @@ function init() {
     var KboardShowMarignTop = MQCurrentFieldEl.offset().top + MQCurrentFieldEl.height() + KboardShowMarign
     content.show(KboardShowMarignLeft,KboardShowMarignTop)
 
+    ///点击空白区隐藏键盘
     $(document).one("touchstart",function(e){
       var MQCurrentField = MQCurrentFieldEl.MQField();
       if (MQCurrentField) {
@@ -42,16 +43,13 @@ function init() {
     
     },
     clickDel:function () {
-      console.log("del");
       clickDelAction()
     },
     cursorLeftMove:function () {
-      console.log("cursorLeftMove");
       var MQCurrentField = MQCurrentFieldEl.MQField();
       MQCurrentField.keystroke('Left');
     },
     cursorRightMove:function () {
-      console.log("cursorRightMove");
       var MQCurrentField = MQCurrentFieldEl.MQField();
       MQCurrentField.keystroke('Right');
     },
@@ -61,6 +59,8 @@ function init() {
 function initEl(elstr, config) {
   var value = $(elstr);
   value.addClass("save_span_tag");
+  
+  ///点击空白区会隐藏键盘，需要但是点击输入框不隐藏，所以阻止点击输入框隐藏键盘，增加阻止冒泡
   value.on("touchstart",function(e){
     e.stopPropagation()
   })

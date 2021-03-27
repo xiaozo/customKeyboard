@@ -47,10 +47,6 @@ var keyboardBody= {
             
         })
 
-        $('#'+this.id+' .action').on('click',function () {
-            console.log("wwww");
-        })
-
         that.cutCapitalHandel()
     },
     //private

@@ -73,6 +73,7 @@ var content = {
         that.up(e);
       });
     } else {
+       ///点击空白区会隐藏键盘，所以阻止冒泡
       this.main().on("touchstart", function (e) {
         e.stopPropagation()
         that.down(e);
