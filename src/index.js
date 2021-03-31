@@ -11,6 +11,13 @@ window.MQCurrentFieldEl = null;
 var KboardShowMarign = 5
 var currentKeyboard = null
 
+function patch(s, re) {
+  // re = eval("/" + re + "/ig")
+  // return s.match(re) ? s.match(re).length : 0;
+  var n = (s.split(re)).length-1;
+  return n
+}
+
 function init() {
   MQ = MathQuill.getInterface(2);
 
@@ -32,14 +39,23 @@ function init() {
 
   $(document).on("focusout", ".mq-textarea textarea", function (e) {
     MQCurrentFieldEl = null;
-    // currentKeyboard.hidden()
+    currentKeyboard.hidden()
   });
 
   currentKeyboard = new ZYKeyboard(undefined,keyboardConfig,{
     clickKey:function (data) {
       if (MQCurrentFieldEl) {
         var MQCurrentField = MQCurrentFieldEl.MQField();
-        MQCurrentField.cmd(data)
+        var count = patch(data,"{}");
+        // MQCurrentField.cmd(data)
+        if (count == 0) {
+          MQCurrentField.cmd(data)
+          return
+        } 
+        MQCurrentField.write(data)
+        for (var i = 0;i < count;i++) {
+          MQCurrentField.keystroke('Left');
+        }
       }
     
     },

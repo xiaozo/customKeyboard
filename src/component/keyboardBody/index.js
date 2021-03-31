@@ -1,5 +1,6 @@
 import keyboardEnglishTmpl from "./view/keyboardEnglishTmpl.art";
 import keyboardNumTmpl from "./view/keyboardNumTmpl.art";
+import keyboardSymbolTmpl from "./view/keyboardSymbolTmpl.art";
 import myUtils from "../../utils/index";
 
 export class KeyboardBody {
@@ -21,6 +22,9 @@ export class KeyboardBody {
     insert(el);
 
     el = template("zy-keyboard-num-tpl", { id: id });
+    insert(el);
+
+    el = template("zy-keyboard-symbol-tpl", { id: id });
     insert(el);
 
     ///增加事件
@@ -78,6 +82,10 @@ export class KeyboardBody {
   
       if ($("#zy-keyboard-num-tpl").length == 0) {
         $("body").append(keyboardNumTmpl);
+      }
+
+      if ($("#zy-keyboard-symbol-tpl").length == 0) {
+        $("body").append(keyboardSymbolTmpl);
       }
   }
 }

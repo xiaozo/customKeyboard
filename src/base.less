@@ -11,6 +11,13 @@
 @shadow4: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 @shadow5: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 
+body{
+    --keyboard-key-width : 66px;
+    --keyboard-key-margin : 3px;
+    --keyboard-key-rows: 8;
+}
+
+
 .ZY__keyboard {
     --keyboard-background: rgba(209, 213, 217, 0.97);
     --keyboard-text: #000;
@@ -40,6 +47,7 @@
     background-color: rgba(209, 213, 217, 0.97);
     -webkit-tap-highlight-color: transparent;
     width: auto;
+
     &.hidden {
         display: none;
     }
@@ -458,6 +466,84 @@
                 }
             }
         }
+
+        .rows-fixed-size {
+
+            flex-direction: row;
+            align-items: flex-start;
+            width: calc((var(--keyboard-key-width) + var(--keyboard-key-margin) * 2) * var(--keyboard-key-rows) + 20px);
+            &>ul {
+                justify-content: space-between;
+                width: 100%;
+                height: auto;
+                flex-wrap: wrap;
+
+                &>li {
+                    height: 53px;
+                    width: 66px;
+                    margin: 3px;
+                    float: left;
+                    &.transparency {
+                        background-color: transparent !important;
+                        border: 1px solid transparent;
+                    }
+                }
+            }
+
+            /* iPhone 5 */
+            @media only screen and (max-width: 414px) {
+                --keyboard-key-width : calc(9vw - 2px);
+                --keyboard-key-margin : 1px !important;
+                &>ul {
+                    &>li {
+                        width: var(--keyboard-key-width);
+                        margin: var(--keyboard-key-margin)  !important;
+                    }
+
+
+                }
+            }
+
+            /* Pixel, iPhone 6,7,8+ */
+            @media only screen and (min-width: 415px) and (max-width: 768px) {
+                --keyboard-key-width : 37px;
+                --keyboard-key-margin : 1px;
+                &>ul {
+                    &>li {
+                        width: var(--keyboard-key-width);
+                        margin: var(--keyboard-key-margin)  !important;
+                    }
+
+                }
+            }
+
+             /* Tablet size */
+             @media only screen and (min-width: 768px) and (max-width: 1024px) {
+                --keyboard-key-width : 51px;
+                --keyboard-key-margin : 2px;
+                &>ul {
+                    &>li {
+                        height: 52px;
+                        width: var(--keyboard-key-width);
+                        margin: var(--keyboard-key-margin)  !important;
+                    }
+                }
+            }
+
+            /* Desktop size */
+            @media only screen and (min-width: 1025px) {
+                --keyboard-key-width : 66px;
+                --keyboard-key-margin : 3px;
+                &>ul {
+                    &>li {
+                        height: 53px;
+                        width: var(--keyboard-key-width);
+                        margin: var(--keyboard-key-margin)  !important;
+                    }
+
+                }
+            }
+        }
     }
 }
 
@@ -468,6 +554,7 @@
         display: inline-block;
         min-height: 0.5em;
     }
+
     .ZY__base {
         visibility: inherit;
         display: inline-block;
@@ -511,42 +598,6 @@
         // layer for this element.
         transform: translateZ(0);
 
-        .sqrt {
-            display: inline-block;
-    
-            > .sqrt-sign {
-                // font-family: KaTeX_Main;
-                position: relative;
-            }
-    
-            .sqrt-line {
-                // line-height: 0;
-                height: 0.04em;
-                width: 100%;
-    
-                &:before {
-                    content: '';
-                    display: block;
-                    margin-top: -0.04em;
-                    min-height: 0.04em;
-                    background: currentColor;
-                }
-    
-                &:after {
-                    border-bottom-width: 1px;
-                    content: ' ';
-                    display: block;
-                    margin-top: -0.1em;
-                    /* On some versions of Firefox on Windows, the line fails to 
-                    draw at some zoom levels, but setting the transform triggers
-                    the hardware accelerated path, which works */
-                    transform: translate(0, 0);
-                }
-            }
-    
-        }
-
-        
     }
 }
 

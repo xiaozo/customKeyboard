@@ -1,0 +1,16 @@
+<script id="zy-keyboard-symbol-tpl" type="text/html">
+<div class="keyboard-layer keyboard-layer-symbol" id="{{id}}-symbol">
+    <div class="rows rows-fixed-size">
+      <ul>
+        <li class="keycap"  data-command='\sqrt{}'>√</li>
+        <li class="keycap"  data-command='\frac{}{}'>/</li>
+        <li class="keycap transparency"></li>
+        <li class="keycap transparency"></li>
+        <li class="keycap transparency"></li>
+        <li class="keycap transparency"></li>
+        <li class="keycap transparency"></li>
+        <li class="keycap transparency"></li>
+     </ul>
+    </div>
+</div>
+</script>

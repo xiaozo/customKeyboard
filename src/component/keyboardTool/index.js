@@ -6,7 +6,7 @@ export class KeyboardTool {
     // id:null,
     constructor(id,insert) {
         this.id = id
-        var data = { left: [{ text: "abc" }, { text: "123" }] };
+        var data = { left: [{ text: "abc" }, { text: "123" },{text:"符号"}] };
     
         var el = template("zy-keyboard-tools-tpl", data);
         var tag = '#'+this.id+" .keyboard-toolbar";
