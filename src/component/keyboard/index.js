@@ -5,7 +5,7 @@ import myUtils from "../../utils/index";
 
 var systemTouchFn = function () {
   event.preventDefault();
-  event.stopPropagation
+  event.stopPropagation()
 };
 
 ///clickKey点击按键
@@ -58,23 +58,53 @@ export class ZYKeyboard {
     // });
 
     ///增加拖拽手势
-    if (myUtils.isPC()) {
-      ///pc
-      this.main().mousedown(function (e) {
-        that.down(e);
-      });
-      this.main().mousemove(function (e) {
-        that.move(e);
-      });
-      this.main().mouseup(function (e) {
-        that.up(e);
-      });
+    // if (myUtils.isPC()) {
+      // ///pc
+      // this.main().mousedown(function (e) {
+      //   that.down(e);
+      // });
+      // this.main().mousemove(function (e) {
+      //   that.move(e);
+      // });
+      // this.main().mouseup(function (e) {
+      //   that.up(e);
+      // });
 
-      $(document).mouseup(function (e) {
-        that.up(e);
-      });
-    } else {
-       ///点击空白区会隐藏键盘，所以阻止冒泡
+      // $(document).mouseup(function (e) {
+      //   that.up(e);
+      // });
+    // } else {
+    //    ///点击空白区会隐藏键盘，所以阻止冒泡
+    //   this.main().on("touchstart", function (e) {
+    //     e.stopPropagation()
+    //     that.down(e);
+    //   });
+
+    //   this.main().on("touchmove", function (e) {
+    //     that.move(e);
+    //   });
+
+    //   this.main().on("touchend", function (e) {
+    //     that.up(e);
+    //   });
+    // }
+
+        ///pc
+        this.main().mousedown(function (e) {
+          that.down(e);
+        });
+        this.main().mousemove(function (e) {
+          that.move(e);
+        });
+        this.main().mouseup(function (e) {
+          that.up(e);
+        });
+  
+        $(document).mouseup(function (e) {
+          that.up(e);
+        });
+        
+      ///点击空白区会隐藏键盘，所以阻止冒泡
       this.main().on("touchstart", function (e) {
         e.stopPropagation()
         that.down(e);
@@ -87,7 +117,6 @@ export class ZYKeyboard {
       this.main().on("touchend", function (e) {
         that.up(e);
       });
-    }
 
     this.main().mousedown(function (e) {
       e.preventDefault();

@@ -29,10 +29,14 @@ function init() {
     
     ///点击空白区隐藏键盘
     $(document).one("touchstart",function(e){
-      var MQCurrentField = MQCurrentFieldEl.MQField();
-      if (MQCurrentField) {
-        MQCurrentField.blur()
+      console.log($(e.target).parents('.save_span_tag'));
+      if ($(e.target).parents('.save_span_tag').length == 0) {
+        var MQCurrentField = MQCurrentFieldEl.MQField();
+        if (MQCurrentField) {
+          MQCurrentField.blur()
+        }
       }
+    
     })
    
   });
@@ -83,9 +87,13 @@ function initEl(elstr, config) {
   })
   var answerMathField = MQ.MathField($(elstr).get(0), config);
   value.data("save_span", answerMathField);
-  if (myUtils.isPC() == false) {
-    // $(elstr + " textarea").attr("readonly", "readonly");
-  }
+  
+  //TOTO:判断平板还是有问题
+  // if (myUtils.isPC() == false) {
+  //   $(elstr + " textarea").attr("readonly", "readonly");
+  // }
+// alert(myUtils.isPC())
+  $(elstr + " textarea").attr("readonly", "readonly");
   return answerMathField;
 }
 
