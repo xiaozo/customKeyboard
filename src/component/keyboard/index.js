@@ -2,7 +2,6 @@ import keyboardTmpl from "./view/keyboardTmpl.art";
 import {KeyboardTool} from "../keyboardTool";
 import {KeyboardBody} from "../keyboardBody";
 import myUtils from "../../utils/index";
-import { version } from "less";
 
 var systemTouchFn = function () {
   event.preventDefault();
