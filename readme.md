@@ -9,7 +9,7 @@ rollup + less + jquery + jquery.tmpl.min.js
 
 - [rollup搭建参考](https://github.com/chenshenhai/rollupjs-note)
 - [rollup各个插件详解](https://blog.csdn.net/mjzhang1993/article/details/78502168)
-- [学习](https://github.com/zhangji012/jquery-scaffold-webapck-rollup)
+- [学习来自](https://github.com/zhangji012/jquery-scaffold-webapck-rollup)
 
 
 
