@@ -8,7 +8,7 @@ const less = require('less');
 const string = require('rollup-plugin-string');
 const autoprefixer = require('autoprefixer');
 const json = require('rollup-plugin-json');
-
+const {cssUrl } = require('@sixian/css-url')  
 
 const resolveFile = function (filePath) {
   return path.join(__dirname, '..', filePath)
@@ -71,14 +71,21 @@ module.exports = [
         extract: true,
         minimize: isProductionEnv,
         process: processLess,
-        plugins: [autoprefixer({
-          // browsers: [
-          //   'last 10 Chrome versions',
-          //   'last 5 Firefox versions',
-          //   'Safari >= 6', 
-          //   'ie> 8'
-          // ] 
-        })]
+        plugins: [
+        //   autoprefixer({
+        //   // browsers: [
+        //   //   'last 10 Chrome versions',
+        //   //   'last 5 Firefox versions',
+        //   //   'Safari >= 6', 
+        //   //   'ie> 8'
+        //   // ] 
+        // })
+        cssUrl({
+          imgOutput: 'dist/imgs',
+          fontOutput: 'dist/font',
+          cssOutput: 'dist/style',
+        }),
+      ]
       }),
       string({
         include: 'src/**/*.art'
