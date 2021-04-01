@@ -46,7 +46,6 @@ export class KeyboardBody {
           $("#" + that.id).trigger("clickDel");
         } else if (data_action === "cursor-left-move") {
           $("#" + that.id).trigger("cursorLeftMove");
-          console.log("ccc");
         } else if (data_action === "cursor-right-move") {
           $("#" + that.id).trigger("cursorRightMove");
         }

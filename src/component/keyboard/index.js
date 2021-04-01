@@ -2,10 +2,10 @@ import keyboardTmpl from "./view/keyboardTmpl.art";
 import {KeyboardTool} from "../keyboardTool";
 import {KeyboardBody} from "../keyboardBody";
 import myUtils from "../../utils/index";
+import { version } from "less";
 
 var systemTouchFn = function () {
   event.preventDefault();
-  event.stopPropagation()
 };
 
 ///clickKey点击按键
@@ -124,6 +124,8 @@ export class ZYKeyboard {
 
 
     $("#"+this.id).on("clickKey",function (e, data) {
+      if (!that.isCanInput()) return
+
      if (that.handle["clickKey"] != undefined) {
        data = that.dataConfig()["data"] == undefined ? data : that.dataConfig()["data"]
       that.handle["clickKey"](data)
@@ -131,25 +133,31 @@ export class ZYKeyboard {
     })
 
     $("#"+this.id).on("clickDel",function (e, data) {
+      if (!that.isCanInput()) return
+
       if (that.handle["clickDel"] != undefined) {
        that.handle["clickDel"](data)
       }
      })
 
      $("#"+this.id).on("cursorRightMove",function (e, data) {
+      if (!that.isCanInput()) return
+
       if (that.handle["cursorRightMove"] != undefined) {
        that.handle["cursorRightMove"](data)
       }
      })
 
      $("#"+this.id).on("cursorLeftMove",function (e, data) {
+      if (!that.isCanInput()) return
+
       if (that.handle["cursorLeftMove"] != undefined) {
        that.handle["cursorLeftMove"](data)
       }
      })
 
     ///默认选择第一项
-    this.selectByIndex(0);
+    this.selectByIndex(0)
   }
 
   dataConfig() {
@@ -203,10 +211,12 @@ export class ZYKeyboard {
     this.cur.y = touch.clientY;
     this.dx = div.offsetLeft;
     this.dy = div.offsetTop;
-    document.body.addEventListener("touchmove", systemTouchFn, false);
+
+    // document.addEventListener("touchmove", systemTouchFn, false);
   }
 
   move(e) {
+    e.preventDefault()
     if (this.flag && Date.now() - this.downTimestamp >= 80 ) {
       var div = this.main().get(0);
       var touch;
@@ -226,8 +236,7 @@ export class ZYKeyboard {
 
   up(e) {
     this.flag = false;
-    document.body.removeEventListener("touchmove", systemTouchFn);
-
+    // document.body.removeEventListener("touchmove", systemTouchFn);
     this.adjuestPostion(
       this.main().offset().left,
       this.main().offset().top
@@ -255,6 +264,10 @@ export class ZYKeyboard {
  
      this.main().css("left", left + "px");
      this.main().css("top", top + "px");
+  }
+
+  isCanInput () {
+      return (Date.now() - this.downTimestamp) <= 150
   }
 }
 

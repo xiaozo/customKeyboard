@@ -57,6 +57,7 @@ export default class myUtils {
       isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua)),
       isPhone = /(?:iPhone)/.test(ua) && !isTablet,
       isPc = !isPhone && !isAndroid && !isSymbian && !isTablet;
+      //  alert(ua)
       return {
            isTablet: isTablet,
            isPhone: isPhone,

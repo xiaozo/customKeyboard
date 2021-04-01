@@ -90,7 +90,7 @@ function initEl(elstr, config) {
   // if (myUtils.isPC() == false) {
   //   $(elstr + " textarea").attr("readonly", "readonly");
   // }
-// alert(myUtils.isPC())
+  
   $(elstr + " textarea").attr("readonly", "readonly");
   return answerMathField;
 }
