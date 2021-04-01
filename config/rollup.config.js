@@ -6,7 +6,7 @@ const commonjs = require('rollup-plugin-commonjs');
 const postcss = require('rollup-plugin-postcss');
 const less = require('less');
 const string = require('rollup-plugin-string');
-const autoprefixer = require('autoprefixer');
+// const autoprefixer = require('autoprefixer');
 const json = require('rollup-plugin-json');
 const {cssUrl } = require('@sixian/css-url')  
 
