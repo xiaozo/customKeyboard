@@ -1,7 +1,5 @@
 import "./base.less";
-// import MathQuill from "mathquill-jquery";
-import $ from "jquery";
-import "jquery.nicescroll";
+import MathQuill from "mathquill-jquery";
 import myUtils from "./utils/index";
 import {ZYKeyboard} from "./component/keyboard";
 import keyboardConfig from "./config/keyboard.json";

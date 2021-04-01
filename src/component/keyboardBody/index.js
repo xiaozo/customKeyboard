@@ -13,7 +13,7 @@ export class KeyboardBody {
   actionSelEl() {
     return $("#" + this.id + " .keyboard-layer.is-visible");
   }
-
+ 
   constructor(id, insert) {
     this.id = id;
 

@@ -1,6 +1,4 @@
 import keyboardToolsTmpl from "./view/keboardToolsTmpl.art";
-import $ from "jquery";
-import "jquery.nicescroll";
 
 export class KeyboardTool {
     // id:null,
