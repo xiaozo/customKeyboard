@@ -1,7 +1,7 @@
 {
-  "name": "ve-pc-jq-cascader-post",
+  "name": "customkeyboard",
   "version": "1.0.0",
-  "description": "最佳东方 jquery 职位弹窗组件",
+  "description": "customkeyboard",
   "main": "dist/index.js",
   "scripts": {
     "serve": "browser-sync start --config config/bs-config.js",
