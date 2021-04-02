@@ -61,7 +61,7 @@ module.exports = [
   {
     input: resolveFile('src/index.js'),
     output: {
-      file: resolveFile('dist/custom-keyboard.js'),
+      file: resolveFile('dist/customkeyboard.js'),
       format: 'umd',
       name: 'CustomKeyboard',
     },

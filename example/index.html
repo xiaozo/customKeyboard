@@ -8,11 +8,11 @@
   <!-- <script src='http://193.168.70.107:8080/dist/mathquill.js' type="text/javascript"></script> -->
   <!-- <script src="http://f3.v.veimg.cn/vip_veryeast_cn_ued/js/plugins/art-template/art-template.js"></script> -->
   <script src='http://193.168.70.107:8080/dist/template-web.js' type="text/javascript"></script>
-  <script src='http://193.168.70.107:8080/dist/mathquill.js' type="text/javascript"></script>
+  <script src='http://193.168.70.107:8080/dist/mathquill.js?v=3' type="text/javascript"></script>
   <!-- <script src='http://193.168.70.107:8080/dist/custom-min-keyboard.js' type="text/javascript"></script> -->
-  <script src='./custom-keyboard.js' type="text/javascript"></script>
+  <script src='./customkeyboard.js' type="text/javascript"></script>
   <link rel="stylesheet" type="text/css" href="http://193.168.70.107:8080/dist/mathquill.css">
-  <link rel="stylesheet" href="./custom-keyboard.css">
+  <link rel="stylesheet" href="./customkeyboard.css">
   <!-- <link rel="stylesheet" type="text/css" href="http://193.168.70.107:8080/dist/custom-keyboard.css"> -->
 </head>
 <style>
@@ -31,12 +31,13 @@
   <p><span id="answer">x=</span></p>
   <p><span id="answer1">x=</span></p>
 
-  <script src="./custom-keyboard.js"></script>
+  <!-- <script src="./custom-keyboard.js"></script> -->
   <script>
 
 function myFunction() {
   console.log($("#answer").latex());
-
+  // MQCurrentField.write('\\embed{customel}[2]')
+  $('#answer').MQField().write('\\embed{fracs}[3-4-22]')
 		}
 
     CustomKeyboard.init()

@@ -10,7 +10,7 @@ const resolveFile = function(filePath) {
 configList.map((config, index) => {
 
   config.output.sourcemap = false;
-  config.output.file = resolveFile('dist/custom-min-keyboard.js'),
+  config.output.file = resolveFile('dist/customkeyboard.min.js'),
   config.plugins = [
     ...config.plugins,
     ...[
