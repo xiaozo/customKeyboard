@@ -141,7 +141,6 @@ function registerEmbed(MQ) {
       });
     },
     latex: function (laterx) {
-      ///几又分之几
       laterx = laterx.replace(/\\embed\{fracs\}\[(.+?)\]/g, function (str) {
         str.match(/\[(.+?)\]/g);
         var values = RegExp.$1.split("-");
