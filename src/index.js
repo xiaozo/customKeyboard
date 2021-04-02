@@ -144,8 +144,9 @@ function registerEmbed(MQ) {
       laterx = laterx.replace(/\\embed\{fracs\}\[(.+?)\]/g, function (str) {
         str.match(/\[(.+?)\]/g);
         var values = RegExp.$1.split("-");
-        var numerator = values[0] * values[2] + values[1];
-        var denominator = values[2];
+        
+        var numerator = parseInt(values[0]) * parseInt(values[2]) + parseInt(values[1]);
+        var denominator = parseInt(values[2]);
         return "\\frac{" + numerator + "}{" + denominator + "}";
       });
       return laterx;
