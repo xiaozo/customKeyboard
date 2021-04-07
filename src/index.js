@@ -2,6 +2,7 @@ import "./base.less";
 import MathQuill from "mathquill-jquery";
 import myUtils from "./utils/index";
 import { ZYKeyboard } from "./component/keyboard";
+import { Shade } from "./component/shade";
 import keyboardConfig from "./config/keyboard.json";
 // https://blog.csdn.net/qq_40323256/article/details/89282801
 window.MQ = null;
@@ -23,29 +24,35 @@ function init() {
   registerEmbed(MQ);
 
   $(document).on("focusin", ".mq-textarea textarea", function (e) {
-    MQCurrentFieldEl = $(e.target).parents(".save_span_tag");
-    var KboardShowMarignLeft =
-      MQCurrentFieldEl.offset().left + MQCurrentFieldEl.width();
-    var KboardShowMarignTop =
-      MQCurrentFieldEl.offset().top +
-      MQCurrentFieldEl.height() +
-      KboardShowMarign;
-    currentKeyboard.show(KboardShowMarignLeft, KboardShowMarignTop);
-
-    ///点击空白区隐藏键盘
-    $(document).one("touchstart", function (e) {
-      if ($(e.target).parents(".save_span_tag").length == 0) {
-        var MQCurrentField = MQCurrentFieldEl.MQField();
-        if (MQCurrentField) {
-          MQCurrentField.blur();
+    if (MQCurrentFieldEl == null) {
+      MQCurrentFieldEl = $(e.target).parents(".save_span_tag");
+      var KboardShowMarignLeft =
+        MQCurrentFieldEl.offset().left + MQCurrentFieldEl.width();
+      var KboardShowMarignTop =
+        MQCurrentFieldEl.offset().top +
+        MQCurrentFieldEl.height() +
+        KboardShowMarign;
+      currentKeyboard.show(KboardShowMarignLeft, KboardShowMarignTop);
+  
+      ///点击空白区隐藏键盘
+      $(document).one("touchstart", function (e) {
+        if ($(e.target).parents(".save_span_tag").length == 0) {
+          var MQCurrentField = MQCurrentFieldEl.MQField();
+          if (MQCurrentField) {
+            MQCurrentField.blur();
+          }
         }
-      }
-    });
+      });
+    }
+ 
   });
 
   $(document).on("focusout", ".mq-textarea textarea", function (e) {
-    MQCurrentFieldEl = null;
-    currentKeyboard.hidden();
+    if (!MQCurrentFieldEl.data("shade")) {
+      MQCurrentFieldEl = null;
+      currentKeyboard.hidden();
+    }
+   
   });
 
   currentKeyboard = new ZYKeyboard(undefined, keyboardConfig, {
@@ -57,7 +64,34 @@ function init() {
 
         if (embedTagCount) {
           ///自定义的符号
-          MQCurrentField.write(data);
+          // MQCurrentField.write(data);
+
+         
+          var fracsEl =
+            '<div class="shade_fracs">' +
+            '<div class="left"><p class="left-c" contenteditable="true"></p></div>'+
+            '<div class="right">'+
+              '<p class="right-top-c" contenteditable="true"></p>'+
+              '<div class="line"></div>'+
+              '<p class="right-bottom-c" contenteditable="true"></p>'+
+            '</div>'+
+            "</div>";
+
+            var showShadeConfig = {
+              el:fracsEl,
+              writeFun:function (sel) {
+               var p1Str = $(sel).find('.left-c').text();
+               var p2Str = $(sel).find('.right-top-c').text();
+               var p3Str = $(sel).find('.right-bottom-c').text();
+               if (!myUtils.isNull(p1Str) && !myUtils.isNull(p2Str) && !myUtils.isNull(p3Str)) {
+                var fracs = p1Str+'-'+p2Str+'-'+p3Str
+                return "\\embed{fracs}[" + fracs + "]";
+               }
+                return false
+              }
+            }
+
+        showShade(showShadeConfig)
           return;
         }
 
@@ -183,6 +217,27 @@ function latex(mqField) {
   return laterx;
 }
 
+function showShade(showShadeConfig) {
+  var el = showShadeConfig.el
+  var writeFun = showShadeConfig.writeFun
+  var shade = new Shade(el,function () {
+    MQCurrentFieldEl.data("shade",null)
+    var MQCurrentField = MQCurrentFieldEl.MQField();
+    MQCurrentField.focus()
+
+    if (writeFun) {
+      var value = writeFun(shade.sel)
+      if (value === false) {
+        return
+      }
+      MQCurrentField.write(value) 
+    }
+  });
+
+  MQCurrentFieldEl.data("shade",shade)
+   shade.show()
+}
+
 ///$扩展
 $.fn.latex = function () {
   return latex($(this).MQField());
@@ -192,4 +247,4 @@ $.fn.MQField = function () {
   return this.data("save_span");
 };
 
-export default { init, initEl };
+export default { init, initEl, ZYKeyboard };

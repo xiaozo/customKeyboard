@@ -647,6 +647,61 @@ body {
     }
 }
 
+.ZY__shade {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background:rgba(0,0,0,.5);
+
+    .ZY__shade_sub {
+        position: absolute;
+        top: 50%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        border-radius:20px;
+        overflow: hidden;
+
+        ///几又分之几
+        .shade_fracs {
+            background-color: white;
+            display: flex;
+            flex-direction: row;
+            justify-content:center;
+            align-items: center;
+            padding: 50px;
+            
+            
+            p {
+                min-width: 50px;
+                min-height: 20px;
+                border:1px solid rgb(160, 209, 160);
+                margin: 0;
+                padding: 0;
+            }
+
+            .left {
+                margin-right: 5px;
+            }
+
+            .right {
+                display: flex;
+                flex-direction: column;
+
+                .line {
+                    width: 100%;
+                    margin: 3px 0 ;
+                    height: 1px;
+                    background-color: black;
+                }
+            }
+        }
+    }
+}
+
+
+
 @media (prefers-color-scheme: dark) {
     body:not([theme='light']) div.ML__keyboard {
         --hue: 198;
