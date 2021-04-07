@@ -34,7 +34,6 @@ function init() {
 
     ///点击空白区隐藏键盘
     $(document).one("touchstart", function (e) {
-      console.log($(e.target).parents(".save_span_tag"));
       if ($(e.target).parents(".save_span_tag").length == 0) {
         var MQCurrentField = MQCurrentFieldEl.MQField();
         if (MQCurrentField) {
@@ -54,14 +53,25 @@ function init() {
       if (MQCurrentFieldEl) {
         var MQCurrentField = MQCurrentFieldEl.MQField();
         var count = patch(data, "{}");
-        if (count == 0) {
-          MQCurrentField.cmd(data);
+        var embedTagCount = patch(data, "embed");
 
+        if (embedTagCount) {
+          ///自定义的符号
+          MQCurrentField.write(data);
           return;
         }
+
+        if (count == 0) {
+          MQCurrentField.cmd(data);
+          return;
+        }
+
         MQCurrentField.write(data);
-        for (var i = 0; i < count; i++) {
-          MQCurrentField.keystroke("Left");
+
+        if (count) {
+          for (var i = 0; i < count; i++) {
+            MQCurrentField.keystroke("Left");
+          }
         }
       }
     },
@@ -115,7 +125,7 @@ function registerEmbed(MQ) {
         var values = value.split("-");
         return {
           htmlString:
-            '<span class="custom-embed-fracs mq-fraction">' +
+            '<span class="custom-embed-fracs">' +
             '<span class="left-p">' +
             values[0] +
             "</span>" +
@@ -144,30 +154,30 @@ function registerEmbed(MQ) {
       laterx = laterx.replace(/\\embed\{fracs\}\[(.+?)\]/g, function (str) {
         str.match(/\[(.+?)\]/g);
         var values = RegExp.$1.split("-");
-        
-        var numerator = parseInt(values[0]) * parseInt(values[2]) + parseInt(values[1]);
+
+        var numerator =
+          parseInt(values[0]) * parseInt(values[2]) + parseInt(values[1]);
         var denominator = parseInt(values[2]);
         return "\\frac{" + numerator + "}{" + denominator + "}";
       });
       return laterx;
-    }
+    },
   };
-  latexAnalysises.push(fracs)
+  latexAnalysises.push(fracs);
 
-  for (var i = 0; i < latexAnalysises.length;i++) {
-    const latexAnalys = latexAnalysises[i]
-    latexAnalys.registerEmbed(MQ)
+  for (var i = 0; i < latexAnalysises.length; i++) {
+    const latexAnalys = latexAnalysises[i];
+    latexAnalys.registerEmbed(MQ);
   }
-
 }
 
 ///获取latex
 function latex(mqField) {
   var laterx = mqField.latex();
 
-  for (var i = 0; i < latexAnalysises.length;i++) {
-    const latexAnalys = latexAnalysises[i]
-    laterx = latexAnalys.latex(laterx)
+  for (var i = 0; i < latexAnalysises.length; i++) {
+    const latexAnalys = latexAnalysises[i];
+    laterx = latexAnalys.latex(laterx);
   }
 
   return laterx;

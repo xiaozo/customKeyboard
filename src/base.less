@@ -11,9 +11,9 @@
 @shadow4: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 @shadow5: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 
-body{
-    --keyboard-key-width : 66px;
-    --keyboard-key-margin : 3px;
+body {
+    --keyboard-key-width: 66px;
+    --keyboard-key-margin: 3px;
     --keyboard-key-rows: 8;
 }
 
@@ -472,6 +472,7 @@ body{
             flex-direction: row;
             align-items: flex-start;
             width: calc((var(--keyboard-key-width) + var(--keyboard-key-margin) * 2) * var(--keyboard-key-rows) + 20px);
+
             &>ul {
                 justify-content: space-between;
                 width: 100%;
@@ -483,6 +484,7 @@ body{
                     width: 66px;
                     margin: 3px;
                     float: left;
+
                     &.transparency {
                         background-color: transparent !important;
                         border: 1px solid transparent;
@@ -492,12 +494,13 @@ body{
 
             /* iPhone 5 */
             @media only screen and (max-width: 414px) {
-                --keyboard-key-width : calc(9vw - 2px);
-                --keyboard-key-margin : 1px !important;
+                --keyboard-key-width: calc(9vw - 2px);
+                --keyboard-key-margin: 1px !important;
+
                 &>ul {
                     &>li {
                         width: var(--keyboard-key-width);
-                        margin: var(--keyboard-key-margin)  !important;
+                        margin: var(--keyboard-key-margin) !important;
                     }
 
 
@@ -506,39 +509,42 @@ body{
 
             /* Pixel, iPhone 6,7,8+ */
             @media only screen and (min-width: 415px) and (max-width: 768px) {
-                --keyboard-key-width : 37px;
-                --keyboard-key-margin : 1px;
+                --keyboard-key-width: 37px;
+                --keyboard-key-margin: 1px;
+
                 &>ul {
                     &>li {
                         width: var(--keyboard-key-width);
-                        margin: var(--keyboard-key-margin)  !important;
+                        margin: var(--keyboard-key-margin) !important;
                     }
 
                 }
             }
 
-             /* Tablet size */
-             @media only screen and (min-width: 768px) and (max-width: 1024px) {
-                --keyboard-key-width : 51px;
-                --keyboard-key-margin : 2px;
+            /* Tablet size */
+            @media only screen and (min-width: 768px) and (max-width: 1024px) {
+                --keyboard-key-width: 51px;
+                --keyboard-key-margin: 2px;
+
                 &>ul {
                     &>li {
                         height: 52px;
                         width: var(--keyboard-key-width);
-                        margin: var(--keyboard-key-margin)  !important;
+                        margin: var(--keyboard-key-margin) !important;
                     }
                 }
             }
 
             /* Desktop size */
             @media only screen and (min-width: 1025px) {
-                --keyboard-key-width : 66px;
-                --keyboard-key-margin : 3px;
+                --keyboard-key-width: 66px;
+                --keyboard-key-margin: 3px;
+
                 &>ul {
                     &>li {
                         height: 53px;
                         width: var(--keyboard-key-width);
-                        margin: var(--keyboard-key-margin)  !important;
+                        margin: var(--keyboard-key-margin) !important;
                     }
 
                 }
@@ -551,36 +557,39 @@ body{
 .custom-embed-fracs {
     display: inline-block;
     position: relative;
+    text-align: center;
+    vertical-align: -0.75em;
+    padding: 0 .2em;
 
     .right {
         display: block;
         float: left;
+
         .top {
             display: block;
-        
+
         }
 
         .bottom {
             border-top: 1px solid;
             display: block;
-            
+
         }
     }
 
     .left {
         display: block;
-        position:absolute;
+        position: absolute;
         top: 50%;
         transform: translateY(-50%);
-    
+
     }
 
     .left-p {
         display: block;
         float: left;
         margin-right: 3px;
-        visibility:hidden
-    
+        visibility: hidden
     }
 }
 
