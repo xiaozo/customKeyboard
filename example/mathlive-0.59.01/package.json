@@ -1,0 +1,139 @@
+{
+    "name": "mathlive",
+    "version": "0.59.0",
+    "description": "Render and edit beautifully typeset math",
+    "license": "MIT",
+    "funding": {
+        "type": "patreon",
+        "url": "https://patreon.com/arnog"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/arnog/mathlive.git"
+    },
+    "bugs": "https://github.com/arnog/mathlive/issues/",
+    "scripts": {
+        "build": "bash ./scripts/build.sh",
+        "clean": "rimraf build dist coverage",
+        "dist": "bash ./scripts/build.sh production",
+        "lint": "eslint --fix src/",
+        "start": "bash ./scripts/build.sh watch",
+        "test": "bash ./scripts/test.sh",
+        "version": "bash ./scripts/version.sh",
+        "postversion": "bash ./scripts/github-release.sh"
+    },
+    "main": "./dist/mathlive.js",
+    "module": "./dist/mathlive.mjs",
+    "types": "./dist/public/mathlive.d.ts",
+    "files": [
+        "/dist"
+    ],
+    "prettier": {
+        "singleQuote": true,
+        "trailingComma": "es5",
+        "endOfLine": "lf",
+        "tabWidth": 4,
+        "jsxSingleQuote": true
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged && bash ./scripts/pre-commit.sh",
+            "pre-push": "npm test"
+        }
+    },
+    "lint-staged": {
+        "/src/**/*.ts": [
+            "eslint --fix"
+        ],
+        "/src/**/*.{ts,css,json,less}": [
+            "prettier --write"
+        ],
+        "/*.md": [
+            "prettier --write"
+        ]
+    },
+    "engines": {
+        "npm": ">=6.14.8",
+        "node": ">=12.0.0"
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "maintained node versions",
+        "not dead"
+    ],
+    "author": "Arno Gourdol <arno@arno.org>",
+    "contributors": [
+        "Louis Larpin (lilfaf.github.io)",
+        "Neil Soiffer (https://github.com/NSoiffer)",
+        "Jason Boxman (https://github.com/jboxman)",
+        "Synergy Codes (https://www.synergycodes.com/)",
+        "Rafał Piekarski (https://github.com/rpdiss)",
+        "Kajetan Champlewski <kchamplewski@gmail.com>",
+        "Fabian Grewing <Fabian.Heimbuerger@gmail.com>",
+        "Paul Masson <paulmasson@comcast.net>",
+        "Soroush Javadi <soroush.javadi@gmail.com>",
+        "Thomas Schell <thom.schell@gmail.com>",
+        "leerobert <lee.robert.138@gmail.com>",
+        "spirobel <spirobel@protonmail.com>",
+        "Artur Fijał <afijal@soldevelo.com>",
+        "David Le Jolly <david.lejolly@gmail.com>",
+        "Johannes Wilm <johanneswilm@gmail.com>",
+        "Nick Gravelyn <nick@gravelyn.com>",
+        "paosder <denjaraos@gmail.com>"
+    ],
+    "devDependencies": {
+        "@babel/plugin-transform-runtime": "^7.13.10",
+        "@babel/preset-env": "^7.13.10",
+        "@babel/types": "^7.12.5",
+        "@cortex-js/prettier-config": "^1.0.0",
+        "@rollup/plugin-babel": "^5.3.0",
+        "@rollup/plugin-commonjs": "^17.1.0",
+        "@rollup/plugin-node-resolve": "^9.0.0",
+        "@types/css-font-loading-module": "0.0.4",
+        "@types/jest": "^26.0.15",
+        "@types/node": "^14.14.6",
+        "@typescript-eslint/eslint-plugin": "^4.6.1",
+        "@typescript-eslint/parser": "^4.6.1",
+        "@typescript-eslint/typescript-estree": "^4.6.1",
+        "autoprefixer": "^9.8.6",
+        "check-node-version": "^4.0.3",
+        "cssnano": "^4.1.10",
+        "eslint": "^7.12.1",
+        "eslint-config-prettier": "^6.15.0",
+        "eslint-plugin-no-unsanitized": "^3.1.4",
+        "eslint-plugin-prettier": "^3.1.4",
+        "http-server": "^0.12.3",
+        "husky": "^4.3.0",
+        "jest": "^26.6.3",
+        "jest-silent-reporter": "^0.2.1",
+        "less": "^3.12.2",
+        "lint-staged": "^10.5.1",
+        "postcss-cli": "^7.1.2",
+        "prettier": "^2.1.2",
+        "rimraf": "^3.0.2",
+        "rollup": "^2.33.1",
+        "rollup-plugin-copy": "^3.3.0",
+        "rollup-plugin-eslint": "^7.0.0",
+        "rollup-plugin-postcss": "^3.1.8",
+        "rollup-plugin-terser": "^7.0.2",
+        "rollup-plugin-typescript2": "^0.29.0",
+        "ts-jest": "^26.4.3",
+        "typescript": "^4.0.5"
+    },
+    "keywords": [
+        "math",
+        "editor",
+        "javascript",
+        "math-editing",
+        "latex",
+        "tex",
+        "mathjax",
+        "katex",
+        "mathquill"
+    ],
+    "dependencies": {
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "babel-preset-env": "^1.7.0"
+    }
+}

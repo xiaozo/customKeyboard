@@ -2,3 +2,4 @@
 node_modules
 dist
 ./dist
+./example/mathlive-0.59.01/node_modules
