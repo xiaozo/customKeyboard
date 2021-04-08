@@ -4,6 +4,8 @@ import myUtils from "./utils/index";
 import { ZYKeyboard } from "./component/keyboard";
 import { Shade } from "./component/shade";
 import keyboardConfig from "./config/keyboard.json";
+// import Mathlive from "./mathlive.min";
+
 // https://blog.csdn.net/qq_40323256/article/details/89282801
 window.MQ = null;
 window.MQCurrentFieldEl = null;
@@ -19,6 +21,7 @@ function patch(s, re) {
 }
 
 function init() {
+// console.log(Mathlive.debug);
   MQ = MathQuill.getInterface(2);
 
   registerEmbed(MQ);
