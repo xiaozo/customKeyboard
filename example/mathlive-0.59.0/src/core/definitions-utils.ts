@@ -973,44 +973,44 @@ export function parseArgAsString(atoms: Atom[]): string {
  *
  * @param params The number and type of required and optional parameters.
  */
-export function defineEnvironment(
-    names: string | string[],
-    params: string,
-    parser: ParseEnvironmentFunction,
-    isTabular = false
-): void {
-    if (typeof names === 'string') {
-        names = [names];
-    }
-    const parsedParams = parseParamTemplate(params);
+// export function defineEnvironment(
+//     names: string | string[],
+//     params: string,
+//     parser: ParseEnvironmentFunction,
+//     isTabular = false
+// ): void {
+//     if (typeof names === 'string') {
+//         names = [names];
+//     }
+//     const parsedParams = parseParamTemplate(params);
 
-    // Set default values of functions
-    const data: EnvironmentDefinition = {
-        tabular: isTabular,
-        // Params: the parameters for this function, an array of
-        // {optional, type}
-        params: parsedParams,
+//     // Set default values of functions
+//     const data: EnvironmentDefinition = {
+//         tabular: isTabular,
+//         // Params: the parameters for this function, an array of
+//         // {optional, type}
+//         params: parsedParams,
 
-        // Callback to parse the arguments
-        parser: parser,
-    };
-    for (const name of names) {
-        ENVIRONMENTS[name] = data;
-    }
-}
+//         // Callback to parse the arguments
+//         parser: parser,
+//     };
+//     for (const name of names) {
+//         ENVIRONMENTS[name] = data;
+//     }
+// }
 
 /**
  * Like defineEnvironment, but for a tabular environment, i.e.
  * one whose content is in tabular mode, where '&' indicata a new column
  * and '\\' indicate a new row.
  */
-export function defineTabularEnvironment(
-    names: string | string[],
-    params: string,
-    parser: ParseEnvironmentFunction
-): void {
-    defineEnvironment(names, params, parser, true);
-}
+// export function defineTabularEnvironment(
+//     names: string | string[],
+//     params: string,
+//     parser: ParseEnvironmentFunction
+// ): void {
+//     defineEnvironment(names, params, parser, true);
+// }
 
 /**
  * Define one of more functions.
