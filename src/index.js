@@ -21,7 +21,7 @@ function patch(s, re) {
 }
 
 function init() {
-// console.log(Mathlive.debug);
+  // console.log(Mathlive.debug);
   MQ = MathQuill.getInterface(2);
 
   registerEmbed(MQ);
@@ -36,7 +36,7 @@ function init() {
         MQCurrentFieldEl.height() +
         KboardShowMarign;
       currentKeyboard.show(KboardShowMarignLeft, KboardShowMarignTop);
-  
+
       ///点击空白区隐藏键盘
       $(document).one("touchstart", function (e) {
         if ($(e.target).parents(".save_span_tag").length == 0) {
@@ -47,7 +47,6 @@ function init() {
         }
       });
     }
- 
   });
 
   $(document).on("focusout", ".mq-textarea textarea", function (e) {
@@ -55,7 +54,6 @@ function init() {
       MQCurrentFieldEl = null;
       currentKeyboard.hidden();
     }
-   
   });
 
   currentKeyboard = new ZYKeyboard(undefined, keyboardConfig, {
@@ -69,32 +67,35 @@ function init() {
           ///自定义的符号
           // MQCurrentField.write(data);
 
-         
           var fracsEl =
             '<div class="shade_fracs">' +
-            '<div class="left"><p class="left-c" contenteditable="true"></p></div>'+
-            '<div class="right">'+
-              '<p class="right-top-c" contenteditable="true"></p>'+
-              '<div class="line"></div>'+
-              '<p class="right-bottom-c" contenteditable="true"></p>'+
-            '</div>'+
+            '<div class="left"><p class="left-c" contenteditable="true"></p></div>' +
+            '<div class="right">' +
+            '<p class="right-top-c" contenteditable="true"></p>' +
+            '<div class="line"></div>' +
+            '<p class="right-bottom-c" contenteditable="true"></p>' +
+            "</div>" +
             "</div>";
 
-            var showShadeConfig = {
-              el:fracsEl,
-              writeFun:function (sel) {
-               var p1Str = $(sel).find('.left-c').text();
-               var p2Str = $(sel).find('.right-top-c').text();
-               var p3Str = $(sel).find('.right-bottom-c').text();
-               if (!myUtils.isNull(p1Str) && !myUtils.isNull(p2Str) && !myUtils.isNull(p3Str)) {
-                var fracs = p1Str+'-'+p2Str+'-'+p3Str
+          var showShadeConfig = {
+            el: fracsEl,
+            writeFun: function (sel) {
+              var p1Str = $(sel).find(".left-c").text();
+              var p2Str = $(sel).find(".right-top-c").text();
+              var p3Str = $(sel).find(".right-bottom-c").text();
+              if (
+                !myUtils.isNull(p1Str) &&
+                !myUtils.isNull(p2Str) &&
+                !myUtils.isNull(p3Str)
+              ) {
+                var fracs = p1Str + "-" + p2Str + "-" + p3Str;
                 return "\\embed{fracs}[" + fracs + "]";
-               }
-                return false
               }
-            }
+              return false;
+            },
+          };
 
-        showShade(showShadeConfig)
+          showShade(showShadeConfig);
           return;
         }
 
@@ -221,24 +222,24 @@ function latex(mqField) {
 }
 
 function showShade(showShadeConfig) {
-  var el = showShadeConfig.el
-  var writeFun = showShadeConfig.writeFun
-  var shade = new Shade(el,function () {
-    MQCurrentFieldEl.data("shade",null)
+  var el = showShadeConfig.el;
+  var writeFun = showShadeConfig.writeFun;
+  var shade = new Shade(el, function () {
+    MQCurrentFieldEl.data("shade", null);
     var MQCurrentField = MQCurrentFieldEl.MQField();
-    MQCurrentField.focus()
+    MQCurrentField.focus();
 
     if (writeFun) {
-      var value = writeFun(shade.sel)
+      var value = writeFun(shade.sel);
       if (value === false) {
-        return
+        return;
       }
-      MQCurrentField.write(value) 
+      MQCurrentField.write(value);
     }
   });
 
-  MQCurrentFieldEl.data("shade",shade)
-   shade.show()
+  MQCurrentFieldEl.data("shade", shade);
+  shade.show();
 }
 
 ///$扩展
