@@ -4,7 +4,7 @@ import myUtils from "./utils/index";
 import { ZYKeyboard } from "./component/keyboard";
 import { Shade } from "./component/shade";
 import keyboardConfig from "./config/keyboard.json";
-// import Mathlive from "./mathlive.min";
+import ZYMath from "./zymath.min";
 
 // https://blog.csdn.net/qq_40323256/article/details/89282801
 window.MQ = null;
@@ -21,7 +21,6 @@ function patch(s, re) {
 }
 
 function init() {
-  // console.log(Mathlive.debug);
   MQ = MathQuill.getInterface(2);
 
   registerEmbed(MQ);
@@ -147,6 +146,10 @@ function initEl(elstr, config) {
   return answerMathField;
 }
 
+function latexToAsciiMath(latex) {
+  return ZYMath.debug.latexToAsciiMath(latex);
+}
+
 ///private
 function clickDelAction() {
   if (MQCurrentFieldEl) {
@@ -251,4 +254,4 @@ $.fn.MQField = function () {
   return this.data("save_span");
 };
 
-export default { init, initEl, ZYKeyboard };
+export default { init, initEl,latexToAsciiMath, ZYKeyboard,ZYMath };

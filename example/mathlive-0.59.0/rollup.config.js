@@ -49,7 +49,7 @@ const TERSER_OPTIONS = {
         },
     },
     output: {
-        preamble: '/* MathLive ' + SDK_VERSION + '  */',
+        preamble: '/* ZYMath ' + SDK_VERSION + '  */',
     },
 };
 
@@ -211,15 +211,15 @@ const ROLLUP = [
                   // compatible, but this gives us a "clean" module)
                   {
                       format: 'es',
-                      file: `${BUILD_DIRECTORY}/mathlive.mjs`,
+                      file: `${BUILD_DIRECTORY}/zymath.mjs`,
                       sourcemap: !PRODUCTION,
                       exports: 'named',
                   },
                   // UMD file, suitable for import, <script> and require()
                   {
                       format: 'umd',
-                      name: 'MathLive',
-                      file: `${BUILD_DIRECTORY}/mathlive.js`,
+                      name: 'ZYMath',
+                      file: `${BUILD_DIRECTORY}/zymath.js`,
                       sourcemap: !PRODUCTION,
                       exports: 'named',
                   },
@@ -227,7 +227,7 @@ const ROLLUP = [
             : [
                   {
                       format: 'es',
-                      file: `${BUILD_DIRECTORY}/mathlive.mjs`,
+                      file: `${BUILD_DIRECTORY}/zymath.mjs`,
                       sourcemap: !PRODUCTION,
                   },
               ],
@@ -245,7 +245,7 @@ ROLLUP.push({
     output: {
         // JavaScript native module
         sourcemap: false,
-        file: 'dist/vue-mathlive.mjs',
+        file: 'dist/vue-zymath.mjs',
         format: 'es',
     },
 });
@@ -293,14 +293,14 @@ if (PRODUCTION) {
             // compatible, but this gives us a "clean" module)
             {
                 format: 'es',
-                file: `${BUILD_DIRECTORY}/mathlive.min.mjs`,
+                file: `${BUILD_DIRECTORY}/zymath.min.mjs`,
                 sourcemap: false,
             },
             // UMD file, suitable for import, <script> and require()
             {
                 format: 'umd',
-                name: 'MathLive',
-                file: `${BUILD_DIRECTORY}/mathlive.min.js`,
+                name: 'ZYMath',
+                file: `${BUILD_DIRECTORY}/zymath.min.js`,
                 sourcemap: false,
             },
         ],
