@@ -143,21 +143,6 @@ function buildProgress() {
     };
 }
 
-const babelOptions = {
-    presets: [
-        [
-            'env',
-            {
-                modules: false,
-            },
-        ],
-    ],
-    plugins: ['transform-object-rest-spread'],
-    extensions: ['.js', '.jsx', '.es6', '.es', '.mjs', '.ts'],
-    include: ['src/**'],
-    exclude: 'node_modules/**', // 只编译我们的源代码
-};
-
 const ROLLUP = [
     // MathLive main module
     {
