@@ -5,6 +5,7 @@ import { ZYKeyboard } from "./component/keyboard";
 import { Shade } from "./component/shade";
 import keyboardConfig from "./config/keyboard.json";
 import ZYMath from "./zymath.min";
+import math from "mathjs";
 
 // https://blog.csdn.net/qq_40323256/article/details/89282801
 window.MQ = null;
@@ -105,7 +106,7 @@ function init() {
 
         MQCurrentField.write(data);
 
-        if (count) {
+        if (count >= 2) {
           for (var i = 0; i < count; i++) {
             MQCurrentField.keystroke("Left");
           }
@@ -261,4 +262,26 @@ $.fn.MQField = function () {
   return this.data("save_span");
 };
 
-export default { init, initEl,latexToAsciiMath, ZYKeyboard,ZYMath };
+///计算结果
+$.fn.calculate = function (config = {}) {
+  var config1 = {
+    number: "BigNumber",
+    precision: 14,
+  };
+  config1 = $.extend(config1, config);
+  math.config(config1);
+
+  try {
+    var asciiMaths = latexToAsciiMath(this.latex());
+    if (myUtils.isNull(asciiMaths)) {
+      throw new Error("asciiMaths is null!");
+    }
+    return math.format(math.evaluate(asciiMaths)); 
+  } catch (err) {
+    console.log(err);
+   return undefined
+  }
+ 
+};
+
+export default { init, initEl, latexToAsciiMath, ZYKeyboard, ZYMath };
