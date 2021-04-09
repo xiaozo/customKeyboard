@@ -39,7 +39,7 @@
     "rollup-plugin-postcss": "^4.0.0",
     "rollup-plugin-serve": "^0.4.2",
     "rollup-plugin-string": "^2.0.2",
-    "rollup-plugin-uglify": "^4.0.0",
+    "rollup-plugin-uglify": "^6.0.4",
     "rollup-plugin-url": "^3.0.0",
     "rollup-watch": "^4.3.1"
   },
@@ -48,6 +48,7 @@
     "jquery": "^3.6.0",
     "jquery.nicescroll": "^3.7.6",
     "mathquill-jquery": "^0.0.2",
+    "postcss": "^8.2.9",
     "rollup-plugin-json": "^4.0.0"
   }
 }
