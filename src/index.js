@@ -246,8 +246,15 @@ function showShade(showShadeConfig) {
 }
 
 ///$扩展
+///可以计算latex
 $.fn.latex = function () {
   return latex($(this).MQField());
+};
+
+///包含自定义的Latex
+$.fn.orginLatex = function () {
+  var laterx = $(this).MQField().latex();
+  return laterx;
 };
 
 $.fn.MQField = function () {
