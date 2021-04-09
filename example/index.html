@@ -36,6 +36,7 @@
 
 function myFunction() {
   console.log($("#answer").orginLatex());
+  console.log($("#answer").latex());
   // MQCurrentField.write('\\embed{customel}[2]')
   $('#answer').MQField().write('\\embed{fracs}[3-4-22]')
 		}
@@ -45,7 +46,7 @@ function myFunction() {
 
     CustomKeyboard.initEl("#answer1")
 
-    console.log(CustomKeyboard.latexToAsciiMath('\\sqrt{\\sqrt{\\sqrt{\\sqrt{\\frac{9}{9}}}}}+\\left(8\\right)'));
+    // console.log(CustomKeyboard.latexToAsciiMath('\\sqrt{\\sqrt{\\sqrt{\\sqrt{\\frac{9}{9}}}}}+\\left(8\\right)'));
 
   //   $.fn.latex = function () {
   //     console.log(this);
