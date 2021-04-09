@@ -106,7 +106,7 @@ function init() {
 
         MQCurrentField.write(data);
 
-        if (count >= 2) {
+        if (count) {
           for (var i = 0; i < count; i++) {
             MQCurrentField.keystroke("Left");
           }
@@ -249,7 +249,8 @@ function showShade(showShadeConfig) {
 ///$扩展
 ///可以计算latex
 $.fn.latex = function () {
-  return latex($(this).MQField());
+  var latex = latex($(this).MQField());
+  return latex;
 };
 
 ///包含自定义的Latex
@@ -273,15 +274,15 @@ $.fn.calculate = function (config = {}) {
 
   try {
     var asciiMaths = latexToAsciiMath(this.latex());
+    asciiMaths = asciiMaths.replace(/÷/g, "/");
     if (myUtils.isNull(asciiMaths)) {
       throw new Error("asciiMaths is null!");
     }
-    return math.format(math.evaluate(asciiMaths)); 
+    return math.format(math.evaluate(asciiMaths));
   } catch (err) {
     console.log(err);
-   return undefined
+    return undefined;
   }
- 
 };
 
 export default { init, initEl, latexToAsciiMath, ZYKeyboard, ZYMath };

@@ -1,6 +1,9 @@
 import shadeTmpl from "./view/shadeTmpl.art";
 export class Shade {
   // el:null,
+  // sel,
+  // handle,
+  // subel
   constructor(subel,handle,left,top) {
       this.sel = ".ZY__shade"
       this.left = left
