@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>基于jQuery UI的超酷虚拟键盘插件|Layouts_jQuery之家-自由分享jQuery、html5、css3的插件库</title>
+	<link rel="stylesheet" type="text/css" href="../css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="../css/default.css">
+	<!-- demo -->
+	<link href="css/demo.css" rel="stylesheet">
+
+	<!-- jQuery & jQuery UI + theme (required) -->
+	<link href="css/jquery-ui.min.css" id="ui-theme" rel="stylesheet">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+
+	<!-- keyboard widget css & script (required) -->
+	<link href="../css/keyboard.css" rel="stylesheet">
+	<link href="../css/keyboard-previewkeyset.css" rel="stylesheet">
+	<script src="../js/jquery.keyboard.js"></script>
+
+	<!-- keyboard extensions (optional) -->
+	<script src="../js/jquery.mousewheel.js"></script>
+	<script src="../js/jquery.keyboard.extension-typing.js"></script>
+	<script src="../js/jquery.keyboard.extension-previewkeyset.js"></script>
+
+	<!-- keyboard layout -->
+	<script src="../layouts/keyboard-layouts-combined.js" charset="utf-8"></script>
+	<!-- theme switcher: https://github.com/pontikis/jui_theme_switch/ -->
+	<style>
+	.switcher_container { padding: 5px; }
+	.switcher_list { padding: 2px; }
+	.switcher_label { margin-right: 5px; }
+	</style>
+	<script src="js/jquery.jui_theme_switch.min.js"></script>
+
+	<script>
+	$(function(){
+
+		$('#switcher').jui_theme_switch({
+			stylesheet_link_id : 'ui-theme',
+			datasource_url     : 'js/theme_switcher.json'
+		});
+
+		var layouts = [
+			// 'title , file name , layout name'
+			"Albanian (qwerty), albanian, albanian-qwerty",
+			"Albanian (qwertz), albanian, albanian-qwertz",
+			"Arabic (azerty), arabic, arabic-azerty",
+			"Arabic (qwerty-1), arabic, arabic-qwerty-1",
+			"Arabic (qwerty-2), arabic, arabic-qwerty-2",
+			"Arabic (qwerty-3), arabic, arabic-qwerty-3",
+			"Arabic (qwerty-4), arabic, arabic-qwerty-4",
+			"Belarusian (Belarus), belarusian, belarusian-qwerty",
+			"Bengali (qwerty-1), bengali, bengali-qwerty-1",
+			"Bengali (qwerty-2), bengali, bengali-qwerty-2",
+			"Bulgarian (qwerty), bulgarian, bulgarian-qwerty",
+			"Catalan (qwerty), catalan, catalan-qwerty",
+			"Chinese, chinese, chinese",
+			"Danish (qwerty), danish, danish-qwerty", // mmm danish
+			"French (azerty-1), french, french-azerty-1",
+			"French (azerty-2), french, french-azerty-2",
+			"French (bepo v1.0rc2), french, french-bepo-V1.0rc2",
+			"German (qwertz-1), german, german-qwertz-1",
+			"German (qwertz-2), german, german-qwertz-2",
+			"Hebrew (qwerty), hebrew, hebrew-qwerty",
+			"Hindi, hindi, hindi",
+			"Magyar (qwertz-1) utf8, hungarian, hungarian-qwertz-1",
+			"Magyar (qwertz-2) utf8, hungarian, hungarian-qwertz-2",
+			"Magyar (qwertz-1) ansi, hungariansi, hungarianansi-qwertz-1",
+			"Magyar (qwertz-2) ansi, hungariansi, hungarianansi-qwertz-2",
+			"Japanese (kana), japanese, japanese-kana",
+			"Japanese (qwerty), japanese, japanese-qwerty",
+			"Latvian (qwerty), latvian, latvian-qwerty",
+			"Mongolian, mongolian, mongolian",
+			"Persian (Farsi), persian, Persian",
+			"Polish (qwerty), polish, polish-qwerty",
+			"Portuguese (qwerty), portuguese, portuguese-qwerty",
+			"Romanian (qwerty), romanian, romanian",
+			"Russian (qwerty), russian, russian-qwerty",
+			"Russian (mac), russian, russian-mac",
+			"Serbian Cyrillic (sr-Cyrl), serbian, sr-Cyrl",
+			"Serbian Latin (sr), serbian, sr",
+			"Serbian Cyrillic Keyboard Layout (српски) for Mac, serbian, sr-Cyrl-mac",
+			"Serbian Latin Keyboard Layout (Srpski) for Mac, serbian, sr-mac",
+			"Spanish (qwerty), spanish, spanish-qwerty",
+			"Spanish (qwerty) special, spanish, spanish-qwerty-sp",
+			"Swedish (qwerty), swedish, swedish-qwerty",
+			"Swedish (dvorak), swedish, swedish-dvorak",
+			"Tamil (qwerty), tamil, tamil-tamil99-mod",
+			"Thai (qwerty), thai, thai-qwerty",
+			"Turkish (q), turkish, turkish-q",
+			"Turkish (f), turkish, turkish-f",
+			"Vietnamese (qwerty), vietnamese, vietnamese-qwerty"
+		],
+
+		t, o = '',
+
+		// Change display language, if the definitions are available
+		showKb = function(layout){
+			var kb = $('#multi').getkeyboard();
+			kb.options.layout = layout;
+			// true flag causes a keyboard refresh
+			kb.reveal(true);
+		};
+
+		$.each(layouts.sort(), function(i, l){
+			t = l.split(/\s*,\s*/);
+			o += '<option data-filename="' + t[1] + '" value="' + t[2] + '">' + t[0] + '</option>';
+		});
+
+		// allow theme selector to set up, otherwise it pushes the page down after the
+		// keyboard has opened and covers up the <h2> layout title
+		setTimeout(function(){
+			$('#multi').keyboard({
+				layout: 'qwerty',
+				stayOpen: true
+			})
+			// activate the typing extension
+			.addTyping({
+				showTyping: true,
+				delay: 50
+			})
+			.previewKeyset();
+
+			$('#lang')
+			.html(o)
+			.change(function(){
+				var kb = $('#multi'),
+					$this = $(this),
+					$opt = $this.find('option:selected'),
+					layout = $this.val();
+				$('h2').text( $opt.text() );
+				showKb( layout );
+			}).trigger('change');
+
+		}, 100);
+
+	});
+	</script>
+	<style>
+	.rtl {
+		text-align: right;
+	}
+	</style>
+	<!--[if IE]>
+		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div class="htmleaf-container">
+		<header class="htmleaf-header">
+			<h1>基于jQuery UI的超酷虚拟键盘插件 <span>A Virtual Keyboard Plugin Using jQuery UI</span></h1>
+			<div class="htmleaf-links">
+				<a class="htmleaf-icon icon-htmleaf-home-outline" href="http://www.htmleaf.com/" title="jQuery之家" target="_blank"><span> jQuery之家</span></a>
+				<a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" href="http://www.htmleaf.com/jQuery/Layout-Interface/201505301932.html" title="返回下载页" target="_blank"><span> 返回下载页</span></a>
+			</div>
+		</header>
+		<div class="htmleaf-content">
+			<div id="page-wrap">
+			<!-- Links to other demo pages & docs -->
+			<div id="nav">
+				<a href="../index.html">Main Demo</a>
+				<a href="basic.html">Basic</a>
+				<a href="mobile.html">Mobile</a>
+				<a class="current" href="layouts.html">Layouts</a>
+				<a href="layouts2.html">Layouts2</a>
+				<a href="layouts3.html">Layouts3</a>
+				<a href="scramble.html">Scramble</a>
+				<a href="navigate.html">Navigate</a>
+				<a href="preview-keyset.html">Keyset</a>
+				<a href="extender.html">Extender</a>
+				<a href="altkeys-popup.html">AltKeys</a>
+				<a href="calculator.html">Calculator</a>
+			</div>
+			<h3>"keyboard-layouts-combined.js"</h3>
+			<h4>This is a work in progress.</h4>
+
+			<div id="switcher"></div>
+			<br>
+			<div class="block2">
+				<select id="lang"></select>
+				<div style="height: 50px;"></div>
+
+				<h2></h2>
+				<input id="multi" type="text" />
+			</div>
+			<br class="clear" />
+
+			<div id="footer2">
+				<div>
+					If you find any errors, please submit an <a href="https://github.com/Mottie/Keyboard/issues">issue</a>.<br>
+					Or if you would like to contribute a layout, please email me at <a href="%6D%61%69%6C%74%6F%3Aw%6Fwm%6Ftty%40g%6Dail%2Ec%6Fm">wowmotty a&#116; &#103;&#109;&#97;&#105;&#108; d&#111;t c&#111;m</a>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="related">
+		    <h3>如果你喜欢这个插件，那么你可能也喜欢:</h3>
+		    <a href="http://www.htmleaf.com/jQuery/Form/201502131372.html">
+			  <img src="../related/1.jpg" width="300" alt="jQuery UI增强功能的Slider滑块插件"/>
+			  <h3>jQuery UI增强功能的Slider滑块插件</h3>
+			</a>
+			<a href="http://www.htmleaf.com/jQuery/Layout-Interface/20141121554.html">
+			  <img src="../related/2.jpg" width="300" alt="jQuery UI可拖拽排序的时间行程表"/>
+			  <h3>jQuery UI可拖拽排序的时间行程表</h3>
+			</a>
+		</div>
+	</div>
+	
+</body>
+</html>
