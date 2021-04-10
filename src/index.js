@@ -274,6 +274,7 @@ $.fn.calculate = function (config = {}) {
   try {
     var asciiMaths = latexToAsciiMath(this.latex());
     asciiMaths = asciiMaths.replace(/÷/g, "/");
+    asciiMaths = asciiMaths.replace(/=/g, "");
     if (myUtils.isNull(asciiMaths)) {
       throw new Error("asciiMaths is null!");
     }
