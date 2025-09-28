@@ -100,7 +100,7 @@ module.exports = [
       buble(),
 
     ],
-    external: ['jquery','mathquill-jquery','mathjs'],
+    external: ['jquery', 'mathjs', 'mathquill-jquery'],
     globals: {
       'jquery' : '$',
       'mathjs' : 'math',

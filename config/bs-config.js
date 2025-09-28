@@ -34,7 +34,7 @@ module.exports = {
         "ignoreInitial": true
     },
     "server": {
-        "baseDir": ["example", "dist"],
+        "baseDir": ["example", "dist","sdk"],
     },
     "port": 13000,
     "middleware": [

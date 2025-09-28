@@ -1,3 +1,4 @@
+// import 'mathquill-jquery/build/mathquill.css'; // ✅ 引入 mathquill 样式
 import "./base.less";
 import MathQuill from "mathquill-jquery";
 import myUtils from "./utils/index";
@@ -5,7 +6,10 @@ import { ZYKeyboard } from "./component/keyboard";
 import { Shade } from "./component/shade";
 import keyboardConfig from "./config/keyboard.json";
 import ZYMath from "./zymath.min";
-import math from "mathjs";
+//  import { create, all } from 'mathjs';
+// const math = create(all);
+import math from 'mathjs';
+
 
 // https://blog.csdn.net/qq_40323256/article/details/89282801
 window.MQ = null;
@@ -135,7 +139,7 @@ function initEl(elstr, config) {
   value.on("touchstart", function (e) {
     e.stopPropagation();
   });
-  var answerMathField = MQ.MathField($(elstr).get(0), config);
+  var answerMathField = MQ.MathField(value.get(0), config);
   value.data("save_span", answerMathField);
 
   //TOTO:判断平板还是有问题
@@ -264,15 +268,18 @@ $.fn.MQField = function () {
 
 ///计算结果
 $.fn.calculate = function (config = {}) {
+ 
   var config1 = {
     number: "BigNumber",
     precision: 14,
   };
+
   config1 = $.extend(config1, config);
   math.config(config1);
-
+ 
   try {
     var asciiMaths = latexToAsciiMath(this.latex());
+    
     asciiMaths = asciiMaths.replace(/÷/g, "/");
     asciiMaths = asciiMaths.replace(/=/g, "");
     if (myUtils.isNull(asciiMaths)) {

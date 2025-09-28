@@ -5,57 +5,58 @@
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="http://193.168.70.107:8080/dist/math.min.js" type="text/javascript"></script>
+  <script src="./math.min.js" type="text/javascript"></script>
   <!-- <script src='http://193.168.70.107:8080/dist/mathquill.js' type="text/javascript"></script> -->
   <!-- <script src="http://f3.v.veimg.cn/vip_veryeast_cn_ued/js/plugins/art-template/art-template.js"></script> -->
-  <script src='http://193.168.70.107:8080/dist/template-web.js' type="text/javascript"></script>
-  <script src='http://193.168.70.107:8080/dist/mathquill.js?v=3' type="text/javascript"></script>
+  <script src='https://unpkg.com/art-template@4.13.2/lib/template-web.js' type="text/javascript"></script>
+  <script src='./mathquill.js?v=3' type="text/javascript"></script>
   <!-- <script src='http://193.168.70.107:8080/dist/custom-min-keyboard.js' type="text/javascript"></script> -->
   <script src='./customkeyboard.js' type="text/javascript"></script>
-  <link rel="stylesheet" type="text/css" href="http://193.168.70.107:8080/dist/mathquill.css">
+  <link rel="stylesheet" type="text/css" href="./mathquill.min.css">
   <link rel="stylesheet" href="./customkeyboard.css">
   <!-- <link rel="stylesheet" type="text/css" href="http://193.168.70.107:8080/dist/custom-keyboard.css"> -->
 </head>
 <style>
   body {
-    box-sizing:border-box;
+    box-sizing: border-box;
   }
-
 </style>
 
-<body >
+<body>
   <button onclick="myFunction()">test</button>
   <button onclick="myFunction()">test</button>
   <div class="art">
-    
+
   </div>
-  <p><span id="answer">x=</span></p>
+  <p><span id="answer"></span></p>
   <p><span id="answer1">x=</span></p>
 
   <!-- <script src="./custom-keyboard.js"></script> -->
   <script>
 
-function myFunction() {
-  // console.log($("#answer").orginLatex());
-  // console.log($("#answer").latex());
+    function myFunction() {
+      // console.log($("#answer").orginLatex());
+      // console.log($("#answer").latex());
 
-  console.log($("#answer").calculate())
+      // console.log($("#answer").calculate())
 
-  // MQCurrentField.write('\\embed{customel}[2]')
-  // $('#answer').MQField().write('\\embed{fracs}[3-4-22]')
-		}
+      // MQCurrentField.write('\\embed{customel}[2]')
+      console.log($('#answer').MQField());
+      
+      $('#answer').MQField().write('\\embed{fracs}[3-4-22]')
+    }
 
     CustomKeyboard.init()
-     CustomKeyboard.initEl("#answer")
+    CustomKeyboard.initEl("#answer")
 
     CustomKeyboard.initEl("#answer1")
 
 
     // console.log(CustomKeyboard.latexToAsciiMath('\\sqrt{\\sqrt{\\sqrt{\\sqrt{\\frac{9}{9}}}}}+\\left(8\\right)'));
 
-  //   $.fn.latex = function () {
-  //     console.log(this);
-  // }
+    // $.fn.latex = function () {
+    //   console.log(this);
+    // }
 
   </script>
 </body>
